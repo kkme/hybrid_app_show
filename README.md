@@ -6,7 +6,7 @@ hybrid_app_show
 cordova_plugins 是 cordova（phonegap）插件，我们的项目都是基于 cordova（phonegap）的。
 
 jfpal_v3 是我们公司的 mobile app，都是依赖于 zepto、seajs和backbone。其中：
-    20002 是我们公司的项目 福店搜索，名字是不是有点土。
+    20002 是 福店搜索，名字是不是有点土。
 
     20003 是 福店管理。
 
