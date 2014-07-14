@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--设置内容宽度自适应设备宽度-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!--屏蔽数字拨号-->
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="utf-8">
+        <title>开店宝</title>
+        <link href="../../../css/reset.css" rel="stylesheet" />
+        <link href="../css/main.css" rel="stylesheet" />
+        <script src="../../../cordova.js"></script>
+        <script src="../../../js/avalon.mobile.min.js"></script>
+        <script>
+            var G_INPAY = false;
+            
+            function startPay() {
+               G_INPAY = true;
+            }
+           
+            function cancelOrder () {
+               G_INPAY = false;
+            }
+           
+            function successOrder() {
+               G_INPAY = false;
+            }
+        </script>
+        <script>
+            function onDeviceReady() {
+                require(['../30004/www/js/main' ,'ready!'], function() {});
+            }
+            document.addEventListener("deviceready", onDeviceReady, true);
+        </script>
+    </head>
+    <body>
+        <!-- 网络请求等待层 -->
+        <div id="loading" ms-important='loading' ms-visible='bool'></div>
+
+        <!-- 商品管理区域 -->
+        <div id='gd_show' ms-controller='goodsShow'>
+            <ul>
+                <li ms-class='re_eff: el.showReEff' ms-repeat='goods' ms-on-tap='editGoods($index)' ms-animationend='removeFx($index)'>
+                    <div class='gd_pic' ms-css-background-image='url({{el.image_src}})'></div>
+                    <span class='gd_name'>{{el.name}}</span>
+                    <span class='gd_price'>￥{{el.price | number(2)}}</span>
+                    <span class='del' ms-on-tap='removeGoods($event, $index)'></span>
+                </li>
+            </ul>
+            <span class='gd_up' ms-on-tap='addGoods'></span>
+        </div>
+
+        <!-- 商品编辑区域 -->
+        <div id='gd_edit' ms-controller='goodsEdit' ms-class='show: isShow'>
+            <div class='box'>
+            	<div class='shade' ms-class='show: isShade' ms-on-tap='hideGd'></div>
+            	<h4>编辑商品</h4>
+            	<div class='gd_sh' ms-on-tap='getGoodsPic' ms-css-background-image='url({{goodsInfo.image_src}})'></div>
+            	<input class='g_na' type='text' ms-duplex='goodsInfo.name' placeholder='输入商品名称'>
+            	<div class='g_pri'>
+            		<input type='number' ms-duplex='goodsInfo.price' placeholder='输入价格'>
+            		<span>元</span>
+            	</div>
+                <textarea class='g_info' placeholder='输入商品描述' ms-duplex='goodsInfo.information'></textarea>
+            	<div class='submit' ms-on-tap='submit'>保存</div>
+            </div>
+            <ul ms-class='show: getPic'>
+                    <li ms-on-tap='openCamera'>拍照上传</li>
+                    <li class='second' ms-on-tap='openGallery'>相册上传</li>
+                    <li class='last' ms-on-tap='hideGetPic'>取消</li>
+                </ul>
+        </div>
+
+        <!-- 商品上传区域 -->
+        <div id='gd_add' ms-controller='addGoods'>
+        	<div class='up_area'>
+        		<h5>上传商品</h5>
+        		<div class='get_pic' ms-on-tap='getGoodsPic' ms-css-background-image='url({{goodsInfo.image_src}})'></div>
+        		<input class='gd_na' type='text' ms-duplex='goodsInfo.name' placeholder='输入商品名称'>
+                <div class='g_pri'>
+                    <input type='number' placeholder='输入价格' ms-duplex='goodsInfo.price'>
+                    <span>元</span>
+                </div>
+        		<textarea class='g_info' placeholder='输入商品描述' ms-duplex='goodsInfo.info'></textarea>
+                <ul>
+                    <li ms-on-tap='openCamera'>拍照</li>
+                    <li ms-on-tap='openGallery'>选择相册</li>
+                    <li ms-on-tap='hideGetPic'>取消</li>
+                    <span class='tri'></span>
+                </ul>
+        	</div>
+            <div class='b_panel'>
+                <div class='cancel' ms-on-tap='goodsEdit'></div>
+                <div class='save' ms-on-tap='addNewGoods'></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--设置内容宽度自适应设备宽度-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!--屏蔽数字拨号-->
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="utf-8">
+        <title>开店宝</title>
+        <link href="../../../css/reset.css" rel="stylesheet" />
+        <link href="../css/main.css" rel="stylesheet" />
+        <script src="../../../cordova.js"></script>
+        <script src="../../../js/avalon.mobile.min.js"></script>
+        <script>
+            var G_INPAY = false;
+            
+            function startPay() {
+               G_INPAY = true;
+            }
+           
+            function cancelOrder () {
+               G_INPAY = false;
+            }
+           
+            function successOrder() {
+               G_INPAY = false;
+            }
+        </script>
+        <script>
+            function onDeviceReady() {
+                require(['../30003/www/js/main' ,'ready!'], function() {});
+            }
+            document.addEventListener("deviceready", onDeviceReady, true);
+        </script>
+    </head>
+    <body>
+        <!-- 网络请求等待层 -->
+        <div id="loading" ms-important='loading' ms-visible='bool'></div>
+
+        <!-- 出售页面 -->
+    	<div id='container' ms-controller='container'>
+            <nav ms-skip='true'>
+                <a href='###'>A</a>
+                <a href='###'>B</a>
+                <a href='###'>C</a>
+                <a href='###'>D</a>
+                <a href='###'>E</a>
+                <a href='###'>F</a>
+                <a href='###'>G</a>
+                <a href='###'>H</a>
+                <a href='###'>I</a>
+                <a href='###'>J</a>
+                <a href='###'>K</a>
+                <a href='###'>L</a>
+                <a href='###'>M</a>
+                <a href='###'>N</a>
+                <a href='###'>O</a>
+                <a href='###'>P</a>
+                <a href='###'>Q</a>
+                <a href='###'>R</a>
+                <a href='###'>S</a>
+            </nav>
+            <div class='goods_area'>
+                <div ms-css-background-image='url({{$val.image_src}})' ms-on-tap='addToCart($key)' ms-repeat='goodsObj'>
+                    <span class='name'>{{$val.name}}</span>
+                    <span class='price'>￥{{$val.price | number(2)}}</span>
+                </div>
+            </div>
+            <div class='sh_tro' ms-class='sli_left: isSlideLeft'>
+                <div class='shade' ms-class='sli_left: isSlideLeft'></div>
+                <span class='un_sh' ms-on-tap='slideEffect' ms-class='sli_left: isSlideLeft'></span>
+                <span class='del' ms-on-tap='clearCart'></span>
+                <div class='total' ms-class='sli_left: isSlideLeft'>
+                    <div class='allMoney'>
+                        <label>合计：</label>
+                        <input type='number' class='money' ms-duplex='total_price'>
+                        <span class='rmb'>元</span>
+                    </div>
+                    <div class='sett' ms-on-tap='set_acc'>下一步</div>
+                </div>
+                <ul ms-class='added: isAdded' ms-animationend='removeAdded'>
+                    <li ms-class='sli_left: isSlideLeft' ms-class-1='empty: el.isEmpty' ms-repeat='goods' ms-animationend='removeFx($index)'>
+                        <div class='g_pic' ms-css-background-image='url({{el.image_src}})'></div>
+                        <span class='g_name'>{{el.name}}</span>
+                        <span class='g_price'>￥{{el.price | number(2)}}</span>
+                        <div class='aj_number'>
+                            <span class='plus' ms-on-tap='addCount($index)'>+</span>
+                            <input type='number' ms-data-id='$index' ms-duplex='el.quantity' data-duplex-changed='isNumber'>
+                            <span class='minus' ms-on-tap='reduceCount($index)'>-</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class='ch_fee' ms-visible='isShow' ms-on-tap='hidePanel'>
+                <div class='panel'>
+                    <h3>选择结算通道</h3>
+                    <div class='whi_fee'>
+                        <span class='lg' ms-on-tap='chFee' ms-class='taped: isLgTaped'>会员零购</span>
+                        <span class='pf' ms-on-tap='chFee' ms-class='taped: isPfTaped'>会员批发</span>
+                    </div>
+                    <p ms-html='feeInfo'></p>
+                    <div class="submit" ms-on-tap='submit'>提交</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

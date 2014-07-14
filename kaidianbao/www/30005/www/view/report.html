@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--设置内容宽度自适应设备宽度-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!--屏蔽数字拨号-->
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="utf-8">
+        <link href="../../../css/reset.css" rel="stylesheet" />
+        <link href="../css/main.css" rel="stylesheet" />
+        <script src='../js/chart.js'></script>
+        <script src="../../../js/avalon.mobile.min.js"></script>
+        <script>
+            var G_INPAY = false;
+            
+            function startPay() {
+               G_INPAY = true;
+            }
+           
+            function cancelOrder () {
+               G_INPAY = false;
+            }
+           
+            function successOrder() {
+               G_INPAY = false;
+            }
+        </script>
+        <script>
+            avalon.config({
+                paths: {
+                    main: '../30005/www/js/main'
+                }
+            });
+
+            // function onDeviceReady() {
+                require(['main' ,'ready!'], function() {});
+            // }
+            // document.addEventListener("deviceready", onDeviceReady, true);
+        </script>
+    </head>
+    <body>
+        <!-- 网络请求等待层 -->
+        <div id="loading" ms-important='loading' ms-visible='bool'></div>
+
+        <!-- 报表区域 -->
+        <div id='container' ms-container='report'>
+            <div class='dSum'>
+                <canvas id='wkda' height='300' width='600'></canvas>
+                <section class='s_days'>
+                    <h4>任意七天销售额</h4>
+                    <label>请选择截至日期</label>
+                    <input type='date' ms-duplex='exDate' ms-duplex-changed='verFmt'>
+                </section>
+            </div>
+            <div class='t_its'>
+                <canvas id='top_items' height='300' width='600'></canvas>
+                <section class='s_days'>
+                    <h4>任意一天销售数量前五商品</h4>
+                    <label>请选择日期</label>
+                    <input type='date' ms-duplex='chDate' ms-duplex-changed='verDate'>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>

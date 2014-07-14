@@ -1,0 +1,90 @@
+/*-------------reset-------------*/
+*{background-repeat: no-repeat;}
+input{outline: none;}
+/*------------- reset结束 -------------*/
+
+html{height: 100%; overflow: hidden;}
+body{height: 100%; font-size: 22px; font-family: sans-serif; background: url(../images/kaidianbao.png) repeat; position: relative; overflow: hidden;}
+[ms-controller]{display: none;}
+/*------------- 网络请求等待层 -------------*/
+#loading{position: fixed; z-index: 11; width: 100%; height: 100%; left: 0; top: 0; background-image: url(../images/loading@2x.gif); background-position: center; background-color: rgba(247, 247, 247, 0.8);}
+/*------------- 网络请求等待层结束 -------------*/
+
+
+/*----------------- #gd_show样式 ---------------*/
+#gd_show{height: 100%; overflow: auto;}
+#gd_show ul{overflow: auto; position: relative; height: 100%;}
+#gd_show li{position: relative; float: left; width: 288px; height: 96px; margin: 16px 0 0 40px; background-color: white; padding: 8px 10px 10px 8px; -webkit-box-sizing: border-box;}
+#gd_show li.re_eff{-webkit-animation: remove 1s ease;}
+@-webkit-keyframes remove{
+	0% {
+		-webkit-transform: rotate(0deg) scale(1, 1);
+	}
+	100% {
+		-webkit-transform: rotate(360deg) scale(0, 0);
+	}
+}
+#gd_show .gd_pic,
+#gd_show .gd_name,
+#gd_show .gd_price{float: left;}
+#gd_show .gd_name,
+#gd_show .gd_price{overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+#gd_show .gd_pic{width: 78px; height: 78px; background-image: url(../images/orange.png); background-size: 78px 78px;}
+#gd_show .gd_name{margin-left: 8px; font-size: 18px; width: 184px; color: #6b6b6b;}
+#gd_show .gd_price{margin: 30px 0 0 8px; font-size: 18px; width: 130px; color: #ff643c;}
+#gd_show .del{position: absolute; right: 10px; bottom: 10px; width: 36px; height: 36px; background-image: url(../images/delete.png);}
+#gd_show .gd_up{position: fixed; left: 20px; bottom: 20px; width: 201px; height: 88px; background-image: url(../images/upload_goods.png);}
+/*----------------- #gd_show样式结束 ---------------*/
+
+
+/*----------------- #gd_edit样式 ---------------*/
+#gd_edit{position: absolute; right: -480px; top: 0; height: 100%; background-color: white; -webkit-transition: right 0.5s ease;}
+#gd_edit.show{right: 0;}
+#gd_edit .box{height: 100%; overflow: auto; width: 480px;}
+#gd_edit .shade{position: absolute; visibility: hidden; opacity: 0; width: 1024px; height: 100%; left: -1024px; background-color: black; -webkit-transition: all 0.5s ease;}
+#gd_edit .shade.show{visibility: visible; opacity: 0.6; width: 544px; left: -544px;}
+#gd_edit h4{text-align: center; color: #ff643c; height: 40px; line-height: 40px;}
+#gd_edit .gd_sh{width: 186px; height: 186px; margin: 10px auto 0; background-size: 100% 100%;}
+#gd_edit .g_na,
+#gd_edit .g_pri{-webkit-box-sizing: border-box; height: 48px; width: 316px; margin: 30px auto; border: 1px solid #DEDEDE; border-radius: 3px; background-color: transparent;}
+#gd_edit .g_na,
+#gd_edit .g_pri input{display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;  -webkit-appearance: none; padding-left: 10px;}
+#gd_edit .g_pri{color: #ff643c;}
+#gd_edit .g_pri input{float: left; width: 80%; height: 100%; border: none; -webkit-box-sizing: border-box;  color: #ff643c;}
+#gd_edit .g_pri span{float: right; width: 20%; height: 100%; line-height: 48px; text-align: center;}
+#gd_edit .g_info{display: block; margin: 30px auto; -webkit-box-sizing: border-box; height: 100px; width: 316px; border-radius: 3px; border: 1px solid #DEDEDE; text-align: left; padding-left: 10px; padding-top: 5px;}
+#gd_edit .submit{height: 48px; width: 316px; border-radius: 3px; text-align: center; line-height: 48px; color: white; background-color: #60BE11; margin: 30px auto 0;}
+#gd_edit ul{position: absolute; bottom: -260px; padding: 30px; background-color: rgba(10, 10, 10, 0.76); color: white; -webkit-box-sizing: border-box; width: 100%; -webkit-transition: bottom 0.5s ease;}
+#gd_edit ul.show{bottom: 0;}
+#gd_edit ul li{background-color: rgb(151, 151, 151); height: 50px; line-height: 50px; text-align: center; border-radius: 5px;}
+#gd_edit ul li.second{margin-top: 20px;}
+#gd_edit ul li.last{margin-top: 30px;}
+/*----------------- #gd_edit样式结束 ---------------*/
+
+
+/*----------------- #gd_add样式 ---------------*/
+#gd_add{display: none; height: 100%; overflow: auto;}
+#gd_add .up_area{position: relative; width: 632px; height: 294px; background-color: white; margin: 108px auto 90px; -webkit-box-sizing: border-box; padding: 20px 28px 33px 28px;}
+#gd_add .up_area > div,
+#gd_add .up_area > input{float: left;}
+#gd_add h5{color: #60BE11; width: 200px; text-align: center;}
+#gd_add .get_pic{border-radius: 3px; margin: 15px 59px 0 0; width: 200px; height: 200px; background-size: 100% 100%;}
+#gd_add input,
+#gd_add .g_info{width: 315px; -webkit-box-sizing: border-box; border-radius: 3px;}
+#gd_add input{padding-left: 10px; border: 1px solid #DEDEDE; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+#gd_add .gd_na,
+#gd_add .g_pri{height: 49px;}
+#gd_add .gd_na{margin-top: 15px;}
+#gd_add .g_pri{margin: 10px auto 0; color: #ff643c; -webkit-box-sizing: border-box; border: 1px solid #DEDEDE; width: 315px;}
+#gd_add .g_pri input{float: left; width: 80%; height: 100%; border: none; -webkit-box-sizing: border-box;  color: #ff643c;}
+#gd_add .g_pri span{float: right; width: 20%; height: 100%; line-height: 49px; text-align: center;}
+#gd_add .submit{height: 48px; width: 316px; border-radius: 3px; text-align: center; line-height: 48px; color: white; background-color: #60BE11; margin: 30px auto 0;}
+#gd_add .g_info{margin-top: 10px; height: 82px; border: 1px solid #DEDEDE; text-align: left; padding-left: 10px; padding-top: 5px;}
+#gd_add ul{display: none; position: absolute; left: 252px; top: 57px; width: 237px; height: 181px; border: 1px solid #FF5B01; border-radius: 5px; background-color: white; -webkit-box-sizing: border-box; padding: 0 15px 15px; box-shadow: 0 0 25px 5px gray;}
+#gd_add ul.show{display: block;}
+#gd_add ul li{border: 1px solid #C7C7C7; border-radius: 3px; height: 36px; margin-top: 15px; line-height: 36px; text-align: center;}
+#gd_add ul .tri{position: absolute; width: 20px; height: 20px; -webkit-transform: rotate(45deg); left: -11px; top: 75px; border-left: 1px solid #FF5B01; border-bottom: 1px solid #FF5B01; background-color: white;}
+#gd_add .b_panel{overflow: hidden; margin: 0 auto; width: 350px; height: 106px;}
+#gd_add .cancel{float: left; width: 106px; height: 106px; background-image: url(../images/close.png);}
+#gd_add .save{float: right; width: 106px; height: 106px; background-image: url(../images/save.png);}
+/*----------------- #gd_add样式结束 ---------------*/

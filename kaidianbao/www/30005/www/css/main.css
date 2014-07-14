@@ -1,0 +1,27 @@
+/*-------------reset-------------*/
+*{background-repeat: no-repeat;}
+input{outline: none;}
+/*------------- reset结束 -------------*/
+
+html{height: 100%; overflow: hidden;}
+body{height: 100%; font-size: 22px; font-family: sans-serif; position: relative; overflow: hidden;}
+/*[ms-controller]{display: none;}*/
+/*------------- 网络请求等待层 -------------*/
+#loading{position: fixed; z-index: 11; width: 100%; height: 100%; left: 0; top: 0; background-image: url(../images/loading@2x.gif); background-position: center; background-color: rgba(247, 247, 247, 0.8);}
+/*------------- 网络请求等待层结束 -------------*/
+
+
+/*------------- 公共组件 -------------*/
+#container > div{padding: 10px 70px 10px; overflow: hidden; -webkit-box-sizing: border-box;}
+canvas{float: left; background-color: rgb(197, 197, 197);}
+.s_days{float: right; margin-top: 60px;}
+h4{margin: 20px 0 10px; text-align: center; background-color: #FF7201; padding: 10px; border-radius: 10px;}
+label{display: block;}
+input{display: block; -webkit-appearance: none; border: 1px solid gray; height: 50px; line-height: 50px; border-radius: 5px; width: 188px; padding-left: 20px; margin-top: 5px;}
+/*------------- 公共组件结束 -------------*/
+
+
+/*----------------- #container样式 ---------------*/
+#container .t_its{padding-right: 25px;}
+#container .t_its input{width: 264px;}
+/*----------------- #container样式结束 ---------------*/
