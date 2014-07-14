@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.jfpal.cordova.connection"
+    version="0.0.1">
+    <name>Connection</name>
+    <description>Jfpal Connection Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,connection,ajax</keywords>
+    <repo>https://github.com/gikoluo/JfpalConnection.git</repo>
+    <issue>https://github.com/gikoluo/JfpalConnection/wiki</issue>
+
+    <js-module src="www/connection.js" name="connection">
+        <merges target="jfpal" />
+    </js-module>
+
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Connection" >
+                <param name="android-package" value="com.jfpal.cordova.connection.Connection"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Connection.java" target-dir="src/com/jfpal/cordova/connection" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Connection">
+                <param name="ios-package" value="JfpalConnection"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/JfpalConnection.h" />
+        <source-file src="src/ios/JfpalConnection.m" />
+    </platform>
+
+</plugin>

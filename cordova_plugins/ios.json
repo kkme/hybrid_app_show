@@ -1,0 +1,185 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Connection\"><param name=\"ios-package\" value=\"JfpalConnection\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Safepay\"><param name=\"ios-package\" value=\"JfpalSafepay\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Context\"><param name=\"ios-package\" value=\"CDVContext\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SNS\"><param name=\"ios-package\" value=\"JfpalSNS\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ContactChooser\"><param name=\"ios-package\" value=\"ContactChooser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DisableShakeToEdit\"><param name=\"ios-package\" value=\"DisableShakeToEdit\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"ios-package\" value=\"CDVContacts\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" onload=\"true\" value=\"CDVStatusBar\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"StatusBarBackgroundColor\" value=\"#000000\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "framework": {
+                "parents": {
+                    "ImageIO.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "CoreLocation.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": "false",
+                            "count": 4
+                        }
+                    ],
+                    "AssetsLibrary.framework": [
+                        {
+                            "xml": "false",
+                            "count": 9
+                        }
+                    ],
+                    "MobileCoreServices.framework": [
+                        {
+                            "xml": "false",
+                            "count": 4
+                        }
+                    ],
+                    "AddressBook.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        },
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "AddressBookUI.framework": [
+                        {
+                            "xml": "false",
+                            "count": 1
+                        },
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "AudioToolbox.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.jfpal.cordova.connection": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.jfpal.cordova.safepay": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.luochunhui.cordova.context": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.jfpal.cordova.sns": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.monday.contact-chooser": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "fr.spirotron.cordova.ios.disableshaketoedit": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.contacts": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.statusbar": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        }
+    },
+    "dependent_plugins": {}
+}

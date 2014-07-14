@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.luochunhui.cordova.context"
+    version="0.0.1">
+    <name>Context</name>
+    <description>Cordova Context Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,context</keywords>
+    <repo>https://github.com/gikoluo/CordovaContext.git</repo>
+    <issue>https://github.com/gikoluo/CordovaContext/wiki</issue>
+
+    <js-module src="www/context.js" name="context">
+        <clobbers target="context" />
+    </js-module>
+
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Context" >
+                <param name="android-package" value="com.luochunhui.cordova.context.Context"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Context.java" target-dir="src/com/luochunhui/cordova/context" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Context">
+                <param name="ios-package" value="CDVContext"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVContext.h" />
+        <source-file src="src/ios/CDVContext.m" />
+    </platform>
+
+</plugin>

@@ -1,0 +1,131 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Connection\"><param name=\"android-package\" value=\"com.jfpal.cordova.connection.Connection\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Safepay\"><param name=\"android-package\" value=\"com.jfpal.cordova.safepay.Safepay\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SNS\"><param name=\"android-package\" value=\"com.jfpal.cordova.sns.SNS\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Context\"><param name=\"android-package\" value=\"com.luochunhui.cordova.context.Context\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ContactChooser\"><param name=\"android-package\" value=\"com.monday.cordova.ContactChooserPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.plugin.datepicker.DatePickerPlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 9
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CONTACTS\" />",
+                            "count": 4
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.jfpal.cordova.connection": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.jfpal.cordova.safepay": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.jfpal.cordova.sns": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.luochunhui.cordova.context": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "fr.spirotron.cordova.ios.disableshaketoedit": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.contacts": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "org.apache.cordova.statusbar": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.monday.contact-chooser": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        },
+        "com.plugin.datepicker": {
+            "PACKAGE_NAME": "com.jfpal.web"
+        }
+    },
+    "dependent_plugins": {}
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.jfpal.cordova.sns"
+    version="0.0.1">
+    <name>SNS</name>
+    <description>Cordova SNS Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,sns</keywords>
+    <repo>https://git.jfpal.com/sns.git</repo>
+    <issue>https://issues.apache.org/jira/browse/CB/component/12320648</issue>
+
+    <js-module src="www/sns.js" name="sns">
+        <clobbers target="sns" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="SNS" >
+                <param name="android-package" value="com.jfpal.cordova.sns.SNS"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/SNS.java" target-dir="src/com/jfpal/cordova/sns" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="SNS">
+                <param name="ios-package" value="JfpalSNS"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/JfpalSNS.h" />
+        <source-file src="src/ios/JfpalSNS.m" />
+    </platform>
+</plugin>

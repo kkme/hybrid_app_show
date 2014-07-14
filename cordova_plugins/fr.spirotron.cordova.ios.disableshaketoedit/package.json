@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "name": "fr.spirotron.cordova.ios.disableshaketoedit",
+    "cordova_name": "iOS Disable Shake to Edit",
+    "description": "Disables iOS shake to undo feature in all input fields.",
+    "license": "Apache 2.0",
+    "repo": "https://github.com/nleclerc/cordova-plugin-ios-disableshaketoedit.git",
+    "keywords": [
+        "cordova",
+        "ios",
+        "input",
+        "gesture",
+        "shaketoedit"
+    ],
+    "engines": []
+}
