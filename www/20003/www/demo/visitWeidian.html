@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+         @author: Captain
+         @date: 2013-07-15
+         -->
+        <!--设置内容宽度自适应设备宽度-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!--状态栏颜色-->
+        <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+        <!--屏蔽数字拨号-->
+        <meta name="format-detection" content="telephone=no">
+        <meta charset="utf-8">
+        <title>查找福店</title>
+        <link href="../../../css/index.css" rel="stylesheet" />
+        <link href="../../../css/reset.css" rel="stylesheet" />
+        <link href="../css/main.css" rel="stylesheet" />
+        <script src="../../../cordova.js"></script>
+        <script src='../../../js/sea.js'></script>
+        <script src='../../../js/zepto/zepto.js'></script>
+        <script src='../../../js/zepto/zepto-data.js'></script>
+        <script src='../../../js/zepto/zepto-selector.js'></script>
+        <script src='../../../js/zepto/zepto-touch.js'></script>
+        <script src='../../../js/zepto/zepto-fx.js'></script>
+        <script src='../../../js/zepto/zepto-fx_methods.js'></script>
+        <script src='../../../js/backbone/underscore.js'></script>
+        <script src='../../../js/backbone/backbone.js'></script>
+        <script src='../../../js/backbone/backbone-localstorage.js'></script>
+        <script src='../../../js/lib/fastclick.js'></script>
+        <script>
+            var G_INPAY = false;
+            
+            function startPay() {
+               G_INPAY = true;
+            }
+           
+            function cancelOrder () {
+               G_INPAY = false;
+            }
+           
+            function successOrder() {
+               app_router.navigate('!findWeidian/2', {trigger: true});
+            }
+        </script>
+        <script>
+            seajs.config({
+                //配置时间戳，解决浏览器或者webview cache问题
+                map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?00001364']]
+            });
+
+            function onDeviceReady() {
+                seajs.use("../js/app");
+            }
+            document.addEventListener("deviceready", onDeviceReady, true);
+        </script>
+    </head>
+    <body>
+        <nav>
+            <span class='leftButton hide'></span>
+            <span class='rightButton'>历史</span>
+            <span class='navTitle'>访问福店</span>
+        </nav>
+
+        <!--网络请求等待层-->
+        <div id="loading"></div>
+
+        <div id='trolley_layer'>
+            <menu>
+                <ul>
+                </ul>
+                <p>还没有添加任何商品</p>
+                <li class='last_li'>
+                    <a class='global_button' href='javascript:void(0)'>
+                        <span class='left'>确</span>
+                        <span class='right'>定</span>
+                    </a>
+                </li>
+            </menu>
+        </div>
+
+        <div id='steps'>
+            <div id='findWeidian'>
+                <div class='s_area'>
+                    <input class='menu_ele' type='text' pattern='[0-9]*' placeholder='请输入收款人手机号/福店ID'>
+                    <span class='sear'>搜索</span>
+                    <ul class='ddb'>
+                    </ul>
+                </div>
+                <!-- <div class='nav'>
+                    <li class='first'>我的福店</li>
+                    <li class='last'>历史记录</li>
+                </div> -->
+                <div class='sort_area'>
+                    <a class='dg_prod' href='javascript:void(0)'>手机数码</a>
+                    <a class='baby_prod' href='javascript:void(0)'>母婴文教</a>
+                    <a class='clo_case' href='javascript:void(0)'>服装箱包</a>
+                    <a class='electr' href='javascript:void(0)'>家电电器</a>
+                    <a class='hairdr' href='javascript:void(0)'>美容美发</a>
+                    <a class='furni' href='javascript:void(0)'>家居建材</a>
+                    <a class='sport' href='javascript:void(0)'>运动健身</a>
+                    <a class='car' href='javascript:void(0)'>汽车办公</a>
+                </div>
+                <ul class='eff_area'>
+                    <li class='first'>
+                        <a href='###'></a>
+                    </li>
+                    <li class='second'>
+                        <a href='###'></a>
+                    </li>
+                    <li class='last'>
+                        <a href='###'></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id='enterWeidian'>
+                <div class='tpl_part'>
+                </div>
+                <div class='sort_column'>
+                    <div class='default_sort taped'>默认排序</div>
+                    <div class='price_sort'>价格排序</div>
+                </div>
+                <ul class='goods_list'>
+                </ul>
+                <div class='bottom_bar'>
+                    <div class='first_div'>
+                        <span class='trolley_icon'>
+                            <span>0</span>
+                        </span>
+                        <span class='optitle'>订单金额：¥</span>
+                        <span class='order_price'>0</span>
+                    </div>
+                    <div class='last_div'>
+                        <span class='settle' rel='!settlement/1'>结算</span>
+                        <!-- <span class='modify'>修改</span> -->
+                        <span class='label'>成交价：¥</span>
+                        <input class='bargain_price' type='number' value='0'>
+                        <span class='tip'>修改价格</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id='settlement'>
+                <ul>
+                    <li class='second'>       
+                        <span></span>
+                        成交价
+                    </li>
+                    <li class='third'>
+                        选择结算通道
+                    </li>
+                    <li class='fourth'>
+                        <span class='left'>会员批发</span>
+                        <span class='right taped'>会员零购</span>
+                        <div class='notice'></div>
+                    </li>
+                    <li class='fifth'>
+                        订单明细
+                    </li>
+                    <li class='last'>
+                    </li>
+                </ul>
+                <a class='global_button' href='javascript:void(0)'>
+                    <span class='left'>结</span>
+                    <span class='right'>算</span>
+                </a>
+            </div>
+        </div>
+
+<!-- 微店信息模版 -->
+        <script type='javascript/template' id='sk_info'>
+            <%
+                var sk_info = '<div class="sk_icon" style="background-image: url(' + model.image_src + ')"></div>';
+
+                var sk_rel_info;
+                // if (context.user.authenFlag == '3') {
+                //     sk_rel_info = '<div class="sk_rel_info">';
+                // } else {
+                    sk_rel_info = '<div class="sk_rel_info notAuthen">';
+                // }
+            %>
+            
+            <div class='sk_info'>
+                <%= sk_info %>
+                <%= sk_rel_info %>
+                    <span class='sk_name'><%= model.name %></span>
+                    <br />
+                    <span class='sk_tel'><%= model.mobile_no %></span>
+                    <div class='flagship'>旗舰店</div>
+                </div>
+            </div>
+        </script>
+<!--  微店信息模版结束 -->
+
+<!-- 商品列表模版 -->
+        <script type='javascript/template' id='goods_list'>
+            <%
+                _.each(collection, function(value, index) {
+                    print('<li data-id=' + value.id + '>' +
+                              '<span class="show_pic" style="background-image: url(' + value.image_src + ')"></span>' +
+                              '<span class="goods_name">' + value.name + '</span>' +
+                              '<span class="rmb_symbol">¥</span>' +
+                              '<span class="price">' + value.price + '</span>' +
+                          '</li>');
+                });
+            %>
+        </script>
+<!-- 商品列表模版结束 -->
+
+<!-- 购物车模版 -->
+        <script type='javascript/template' id='trolley_layer_tpl'>
+            <%
+                if (Object.keys(data).length == 0) {
+                    $('#trolley_layer p').show();
+                } else {
+                    $('#trolley_layer p').hide();
+                }
+                _.each(data, function(value, index) {
+                    print('<li class="amount" data-id=' + index + '>' +
+                              '<span class="gn">' + value[0].name + '</span>' +
+                              '<input type="number" pattern="[0-9]*" class="no" value=' + value.length + '>' +
+                              '<span class="del">删除</span>' +
+                          '</li>');
+                });
+            %>
+        </script>
+<!-- 购物车模版结束 -->
+
+<!-- 订单明细模版 -->
+        <script type='javascript/template' id='orderInfo_tpl'>
+            <%
+                var length = Object.keys(data).length;
+                var i = 0;
+                _.each(data, function(value, index) {
+                    var cl = (i++ == length - 1) ? ' class="last_div"' : '';
+                    print('<div' + cl + '>' +
+                              '<span class="item_name">' + value[0].name + '</span>' +
+                              '<span class="item_no">' + value.length + '</span>' +
+                              '<span class="item_price">¥' + value[0].price + '</span>' +
+                          '</div>');
+                });
+            %>
+        </script>
+<!-- 订单明细模版结束 -->
+    </body>
+</html>
