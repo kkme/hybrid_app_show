@@ -121,7 +121,7 @@ define('chartConfig', function() {
 
 	var returnData = {
 		data: {
-		    labels: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+		    labels: [],
 		    datasets: [
 		        {
 		            label: "My First dataset",
@@ -131,7 +131,7 @@ define('chartConfig', function() {
 		            pointStrokeColor: "red",
 		            pointHighlightFill: "#fff",
 		            pointHighlightStroke: "rgba(220,220,220,1)",
-		            data: [65, 59, 80, 81, 56, 55, 40]
+		            data: []
 		        }
 		    ]
 		},

@@ -12,7 +12,7 @@ body{height: 100%; font-size: 22px; font-family: sans-serif; position: relative;
 
 
 /*------------- 公共组件 -------------*/
-#container > div{padding: 10px 70px 10px; overflow: hidden; -webkit-box-sizing: border-box;}
+#container > div{padding: 30px 20px 10px; overflow: hidden; -webkit-box-sizing: border-box;}
 canvas{float: left; background-color: rgb(197, 197, 197);}
 .s_days{float: right; margin-top: 60px;}
 h4{margin: 20px 0 10px; text-align: center; background-color: #FF7201; padding: 10px; border-radius: 10px;}
@@ -22,6 +22,6 @@ input{display: block; -webkit-appearance: none; border: 1px solid gray; height: 
 
 
 /*----------------- #container样式 ---------------*/
-#container .t_its{padding-right: 25px;}
+#container .t_its{padding-right: 25px; padding-top: 50px;}
 #container .t_its input{width: 264px;}
 /*----------------- #container样式结束 ---------------*/

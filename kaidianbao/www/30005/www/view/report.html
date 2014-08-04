@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <link href="../../../css/reset.css" rel="stylesheet" />
         <link href="../css/main.css" rel="stylesheet" />
+        <script src="../../../cordova.js"></script>
         <script src='../js/chart.js'></script>
         <script src="../../../js/avalon.mobile.min.js"></script>
         <script>
@@ -32,10 +33,10 @@
                 }
             });
 
-            // function onDeviceReady() {
+            function onDeviceReady() {
                 require(['main' ,'ready!'], function() {});
-            // }
-            // document.addEventListener("deviceready", onDeviceReady, true);
+            }
+            document.addEventListener("deviceready", onDeviceReady, true);
         </script>
     </head>
     <body>
@@ -43,21 +44,21 @@
         <div id="loading" ms-important='loading' ms-visible='bool'></div>
 
         <!-- 报表区域 -->
-        <div id='container' ms-container='report'>
+        <div id='container' ms-controller='report'>
             <div class='dSum'>
-                <canvas id='wkda' height='300' width='600'></canvas>
+                <canvas id='wkda' height='250' width='500'></canvas>
                 <section class='s_days'>
                     <h4>任意七天销售额</h4>
                     <label>请选择截至日期</label>
-                    <input type='date' ms-duplex='exDate' ms-duplex-changed='verFmt'>
+                    <input type='date' ms-duplex='exDate' data-duplex-changed='verFmt'>
                 </section>
             </div>
             <div class='t_its'>
-                <canvas id='top_items' height='300' width='600'></canvas>
+                <canvas id='top_items' height='250' width='400'></canvas>
                 <section class='s_days'>
                     <h4>任意一天销售数量前五商品</h4>
                     <label>请选择日期</label>
-                    <input type='date' ms-duplex='chDate' ms-duplex-changed='verDate'>
+                    <input type='date' ms-duplex='chDate' data-duplex-changed='verDate'>
                 </section>
             </div>
         </div>
