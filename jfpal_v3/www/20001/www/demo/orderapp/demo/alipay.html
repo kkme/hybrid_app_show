@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no;address=no;email=no">
+<meta charset="utf-8">
+<title>我的订单</title>
+<link href="../css/jfpal-native.css" type="text/css" rel="stylesheet" />
+<script src="../../../../../cordova.js"></script>
+<script src='../../../../../js/sea.js'></script>
+<script src='../../../../../js/zepto/zepto.js'></script>
+<script src='../../../../../js/zepto/zepto-touch.js'></script>
+<script src='../../../../../js/backbone/underscore.js'></script>
+<script src='../../../../../js/backbone/backbone.js'></script>
+<script src='../../../../../js/backbone/backbone-localstorage.js'></script>
+<script src="../js/jfpal.js"></script>
+<script>
+    seajs.config({
+         map: [[ /^(.*\.(?:css|js))(.*)$/i, '$1?20110814' ]]
+     });
+	
+    function onDeviceReady() {
+        seajs.use('../js/app');
+	}
+    
+    document.addEventListener("deviceready", onDeviceReady, true);
+</script>
+</head>
+<body>
+<nav class='navBar'>
+    <span class='leftButton'></span>
+    <span class='rightButton'>中奖订单</span>
+    <span class='navTitle'>我的订单</span>
+</nav>
+<section id="page" class="page">
+	<section id="order-loading" class="order-loading"></section>
+	<header id="order-header" class="order-header">
+		<h1>我的订单</h1>
+		<button class="back">返回</button>
+	</header>
+	
+	<section id="order-list" class="order-list hidden">
+		<!-- This is the main container and nav for the order list. -->
+		<header >
+			<ul id="order-nav" style="display:none">
+				<li class="all nav-item"  rel="all">全部订单</li>
+				<li class="lucky nav-item" rel="lucky">中奖订单</li>
+			</ul>
+		</header>
+		<section id="scrollview-list-con" class="bd">
+			<div>
+				<ul class="list" id="order-list-con"></ul>
+				<div class="loading"><img src="../../../images/loading.gif" />加载中</div>
+				<div class="more hidden">点击查看更多订单</div>
+			</div>
+		</section>
+	</section>
+
+	<section id="order-detail" class="order-detail hidden">
+		<div class="loading"><img src="../../../images/loading.gif" />加载中</div>
+		<div class="detail-content" id="order-detail-con"></div>
+	</section>
+</section>
+
+    <!-- This template HTML will be used to render each order item.<th class="w5">
+     <%= C.Template.orderTypeMap[orderType] %>
+     <%
+     if(orderType == "2")
+     print('<span>' + creatorNick + '</span>');
+     else if(orderType == "3")
+     print(' ' + process);
+     %>
+     </th> -->
+<script type="text/x-template" id="order-item-template">
+	<div class="logo">
+		<img class="<%= C.Template.lotteryTypeMap[lotteryType].cls %>"/>
+	</div>
+	<div class="detail">
+		<table>
+			<tr>
+				<th colspan="2">
+                    <p>
+                        <em class="s"><%= C.Template.lotteryTypeMap[lotteryType].name %></em>
+                        <em class="p"><a href="javascript:void(0)">第<%= periodId %>期</a></em>
+                    </p>
+				</th>
+			</tr>
+			<tr class="bd">
+                <td colspan="2"><%= betDate %></td>
+			</tr>
+			<tr class="ft">
+				<td class="o"><%= C.Template.numberFormat(orderAmt) %> 元</td>
+                <%
+                    if(orderStatus == '00')
+                        print('<td><div class="pay">立即支付</div></td>');
+                    else if(orderStatus == '05')
+                        print('<td><div class="win"><img class="winImage" /></div></td>');
+                    else
+                        print('<td style="text-align:center">' + C.Template.orderStatusMap[orderStatus] + '</td>');
+                %>
+			</tr>
+		</table>
+		<s></s>
+	</div>
+</script>
+
+    <!-- This template HTML will be used to render each order item. <% if (typeof orderNumber !== 'undefined') { %>
+     <dd class="ex">
+     <a href="javascript:void(0);" class="continueBuy">继续购买</a>
+     </dd>
+     <% } %>-->
+<script type="text/x-template" id="order-detail-template-n-dg">
+	<div class="bd" id="scrollview-detail-con">
+        <div>
+            <table class="detail">
+                <tr class="q">
+                    <td class="l">
+                        <%= C.Template.lotteryTypeMap[lotteryType].name %>:
+                    </td>
+                    <td class="r">
+                        <a href="javascript:void(0)">第<%= periodId %>期</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                        订单号：
+                    </td>
+                    <td class="r">
+                        <%= orderNo %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                        支付时间：
+                    </td>
+                    <td class="r">
+                        <%
+                            if (orderStatus !== "00" && orderStatus !== "02" && orderStatus !== "09")
+                                print(betDate);
+                            else
+                                print('--');
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                        投注金额：
+                    </td>
+                    <td class="r">
+                        <%
+                            print(C.Template.numberFormat(orderAmt) + '元');
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                        中奖金额：
+                    </td>
+                    <td class="r">
+                        <% 
+                            if (typeof winFee !== 'undefined' && winFee > 0)
+                                print(C.Template.numberFormat(winFee) + '元');
+                            else
+                                print('--');
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                        订单状态：
+                    </td>
+                        <td class="r" <% if (orderStatus === '00') {%> style="color:#285ac8;font-size:17px;font-weight:600;" <% }%>>
+                        <%= C.Template.orderStatusMap[orderStatus] %>
+                    </td>
+                </tr>
+            </table>
+            <div class="c">
+                投注内容:
+            </div>
+            <%
+            if (typeof orderDetail !== 'undefined') {
+                _.each(orderDetail, function(order) {
+                    
+            %>
+                   <table style="width:100%;">
+                    <tr>
+                   <td style="padding-left:10px;width: 70%;">
+                       <p class="betBall">
+                       <%
+                           // replace前"01,02,03", replace后"01 02 03"
+                           var betNumber = order.betNumber.replace(/,/g, ' ');
+                           // jfpal
+                           //双色球、七乐彩
+                           if(lotteryType == 01){
+                               var lucky = betNumber.split('|');
+                               print(lucky[0].replace(/(\d{2})/gi,'<em>$1</em>') + lucky[1].replace(/(\d{2})/gi,'<span>$1</span>'));
+                           }else if(lotteryType == 05){
+                               //福彩3d
+                               print(betNumber.replace("|0", "").replace(/,/gi,'').replace(/(\d{1})/gi,'<em>$1</em>'));
+                           }else if(lotteryType == 10){
+                               //十五选五
+                               print(betNumber.replace(/(\d{2})/gi,'<em>$1</em>'));
+                           }
+                       %>
+                       </p>
+                   </td>
+                       <td class="m">
+                            <%
+                               if (order.betMode == '1')
+                                   print('单式: ' + Number(order.betAmt) / 100 / 2 / order.multiple +' 注');
+                               else if (order.betMode >= '2')
+                                   print('复式: ' + Number(order.betAmt) / 100 / 2 / order.multiple + ' 注');
+                            %>
+                       </td>
+                       </tr>
+               </table>
+               <%
+                       });
+                    }
+                %>
+                <div class="b">
+                    <span>倍数:</span>
+                    <span><%= orderDetail[0].multiple %>倍</span>
+                    <span>注数:</span>
+                    <span style="margin-right:18px;"><%= totalStake %>注</span>
+                </div>
+			<hr>
+            <div class="w">
+                开奖号码:
+            </div>
+            <% if (typeof awardNumber !== 'undefined' && awardNumber !== '') { %>
+                <dd class="ball" style="margin-left:30px;">
+                <%
+                    print(C.Template.showLuckNumber(awardNumber));
+                %>
+                </dd>
+            <%
+                } else {
+                    print('<div class="wait"><img class="clock" src="../img/clock.png"/><span>等待开奖</span></div>');
+                }
+            %>
+		</div>
+	</div>
+</script>
+</body>
+</html>

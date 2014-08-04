@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<!--
+    @author: luochunhui (Giko) 
+    @email: wo@luochunhui.com 
+    @date: 2013-05-04
+-->
+<!--设置内容宽度自适应设备宽度-->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<!--屏蔽数字拨号-->
+<meta name="format-detection" content="telephone=no" />
+<!--自动隐藏导航栏-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta charset="utf-8">
+<title>彩票</title>
+<link href="../../../css/index.css" type="text/css" rel="stylesheet" />
+<link href="../../../css/reset.css" type="text/css" rel="stylesheet" />
+<link href="../css/bet.css" type="text/css" rel="stylesheet" />
+<link href="../css/jfpal-native.css" type="text/css" rel="stylesheet" />
+<link href="../css/itabbar.css" type="text/css" rel="stylesheet" />
+  
+<script src="../../../cordova.js"></script>
+<script src='../../../js/sea.js'></script>
+<script src='../../../js/zepto/zepto.js'></script>
+<script src='../../../js/zepto/zepto-data.js'></script>
+<script src='../../../js/zepto/zepto-selector.js'></script>
+<script src='../../../js/zepto/zepto-touch.js'></script>
+<script src='../../../js/zepto/zepto-fx.js'></script>
+<script src='../../../js/zepto/zepto-fx_methods.js'></script>
+<script src='../../../js/backbone/underscore.js'></script>
+<script src='../../../js/backbone/backbone.js'></script>
+<script src='../../../js/backbone/backbone-localstorage.js'></script>
+<script type="text/javascript">
+	//配置时间戳，解决浏览器或者webview cache问题
+	seajs.config({
+		map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?00001364']]
+	});
+</script>
+<script type="text/javascript">
+	function onDeviceReady() {
+		seajs.use('../js/app');
+	}
+    document.addEventListener("deviceready", onDeviceReady, true);
+</script>
+</head>
+
+<body>
+<nav class='navBar'>
+    <span class='leftButton'></span>
+    <span class='rightButton'></span>
+    <span class='navTitle'>彩票</span>
+</nav>
+<section id="doc">
+    <section id="wrapper" class="anim">
+		<section id="appnav" class="temp" style="width:100%;">
+			<!--菜单{{-->
+			<menu class="appMenu" id="appMenu">
+				<ul>
+					<li class="lottype first ssq" rel="ssq">
+						<a href="index-alipay-native-app.html#!ssq/bet/2">
+							<span class="icon"></span>
+							<div class="txt">
+								<p><em class="lotname">双色球</em><em class="periodNo" id="ssqPeriodNo"></em></p>
+								<p style="color: #828282">每注2元，最高奖1000万</p>
+							</div>
+							<s></s>
+						</a>
+					</li>
+					
+					<li class="lottype fc3d" rel="fc3d">
+						<a href="index-alipay-native-app.html#!fc3d/zhx/bet/2">
+							<span class="icon"></span>
+							<div class="txt">
+								<p><em class="lotname">福彩3D</em><em class="periodNo" id="fc3dPeriodNo"></em></p>
+								<p style="color: #828282">2元赢取1000元，中奖率高</p>
+							</div>
+							<s></s>
+						</a>
+					</li>
+				</ul>
+			</menu>
+			<!--菜单}}-->
+		</section>
+	
+	</section>
+</section>
+
+<!-- Tabbar -->
+<nav id="tabbar">
+    <ul>
+        <li>
+            <a href="index-alipay-native-app.html#!reward/2" id="home" class=" flip">
+                <strong>开奖公告</strong>
+            </a>
+        </li>
+        <li>
+            <a href="orderapp/demo/alipay.html" id="categories" class=" flip">
+                <strong>我的订单</strong>
+            </a>
+        </li>
+    </ul>
+</nav>
+    
+</body>
+</html>

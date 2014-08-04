@@ -1,0 +1,279 @@
+html{background-color: #F0F0F0;}
+body{background-image: none;}
+
+#doc{height: auto !important;}
+#wrapper{background: #eee; margin-left:0; margin-top: 46px;}
+#wrapper.ios7{margin-top: 66px;}
+#wrapper.anim{-moz-transition:margin-left .4s ease-in-out;-webkit-transition:margin-left .4s ease-in-out; width: auto !important;}
+#wrapper.right{margin-left:-100%;}
+/*.temp{float:left;}*/
+.clip{overflow:hidden;}
+.clip.ios7{}
+
+#appnav{  }
+#tabbar { display:none; }
+#errShow{padding-top:100px;text-align:center;color:#6e6e6e;font-size:18px;}
+.loading{padding-top:100px;text-align:center;font-size:18px;color:#6e6e6e;}
+.loading img{vertical-align:middle;}
+.loading.small{line-height:60px;height:60px;padding-top:0;font-size:15px;text-align:left;padding-left:51px;}
+.loading.small img{margin-right:33px;}
+/*弹出层*/
+.mask{background:#000;opacity:0.4;width:100%;position:absolute;z-index:99;left:0;top:0;height:100%;}
+.wait{position:absolute;z-index:100;background:#1f1f1f;border-radius:5px;width:163px;left:50%;top:50%;margin:-14px 0 0 -80px;color:#fff;font-weight:700;line-height:29px;text-align:center;}
+
+/*公用页头*/
+.header{line-height:50px;height:50px;text-align:center;}
+.header .return{float: left;width:34px;height: 31px;color:#676767;text-align:left;font-size:12px;padding-left: 21px;margin:10px 0 0 10px;line-height: 31px;}
+.header figure{position: absolute;left:50%;margin-left:-42px;top:0;}
+.header figure img{width:83px;height:16px;}
+.header h2{font-size: 16px;color:#333;width:150px;position:absolute;top:0;left:50%;margin-left:-75px;}
+.header .type{float: right;width: 64px;border:1px solid #d5d5d5;border-bottom:1px solid #b4b4b4;background:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e8e8e8));height: 30px;color:#676767;font-size: 12px;text-align: center;margin:10px 10px 0 0;border-radius:4px;line-height:30px;}
+
+/*导航页*/
+.appMenu{position:absolute;background:#eee; height:auto !important; width:100%;min-width:320px;left:0;}
+.appMenu ul{padding-bottom:20px;}
+.appMenu ul li{padding: 8px 15px 8px 5px;border:1px solid #cfcfcf; border-top: none; overflow: hidden;}
+.appMenu ul li.first{border-top:0 none;}
+.appMenu ul li.taped{background:#fff;}
+.appMenu ul li a{display: block;height:60px;color:#6e6e6e;position: relative;}
+.appMenu ul li a .icon{float: left;width:60px;height: 60px;}
+.appMenu ul li a .txt{float: left;margin-left:12px;padding-top:5px;text-shadow:0 1px 0 #fff;}
+.appMenu ul li a .txt .onlyone{padding-top:12px;}
+.appMenu ul li a .txt .lotname{font-size: 18px;font-weight: 700;color: #323232;}
+.appMenu ul li a .txt .periodNo{margin-left:18px;color: #3c2d5a;}
+.issueCount{font-size:14px;}
+.appMenu ul li a s{position:absolute;width: 8px;height: 12px;right:0;top:50%;margin-top: -6px;background: url('../images/j.png') no-repeat;background-size:8px 12px;}
+
+/*开奖公告*/
+#rewardMain .ball{color:#BD1C1C;}
+#rewardMain .ball em, #rewardListMain .lucky em,
+#rewardMain .ball span, #rewardListMain .lucky span {
+margin-right: 1%;
+font-weight: 700;
+color: #fff;
+display: inline-block;
+width: 27px;
+height: 27px;
+text-align: center;
+background-size: 100% 100%;
+line-height: 27px;
+}
+#rewardMain .ball em, #rewardListMain .lucky em{
+	background-color: #EB312E;
+border-radius: 30px;
+}
+#rewardMain .ball span, #rewardListMain .lucky span{
+	background-color: #216DED;
+	margin-top: 5px;
+border-radius: 20px;
+}
+#rewardListMain ul{}
+#rewardListMain ul li{height:50px;padding-right:0;}
+#rewardListMain .other{color:#6e6e6e;overflow:hidden;text-shadow:0 1px 0 #fff;}
+#rewardListMain .other em{color:#686868;}
+#rewardListMain .other span{margin-left:10px;color:#8d8d8d;fonts-size:12px;}
+#rewardListMain .lucky{color:#BD1C1C;font-size:15px;font-weight:700;}
+
+
+#rewardListMain .tip{text-align:center;line-height:60px;height:60px;overflow:hidden;color:#6e6e6e;}
+#rewardListMain .tip span{float:left;margin-left:100px;}
+#rewardListMain .tip s{-webkit-transition:-webkit-transform .2s ease-in-out;-moz-transition:-moz-transform .2s ease-in-out;-webkit-transform:rotate(0);-moz-transform:rotate(0);display:block;width:21px;height:40px;margin:9px 0 0 50px;background-size:21px 40px;}
+#rewardListMain .tip s.rotate{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);}
+
+#rewardListMain .getMore , #rewardListMain .load{line-height:50px;text-align:center;}
+
+
+/*投注蓝*/
+.betBasket{background-color: #F0F0F0;}
+
+#betScroll{border:1px solid #eee;}
+#betScroll .sep{ height: 4px; width: 100%; background: url('../images/dashed_purple.png') no-repeat;background-size: 100% 100%;}
+
+#shakeSelect{
+	overflow:hidden;width:100%;min-width:320px;height:280px;top:0;left:0;
+	background-attachment:fixed;
+	background-position: center 20%;
+}
+#shakeSelect .pbox{
+}
+#shakeSelect .pbox .tip{text-align:center;line-height:30px;height:30px;overflow:hidden;margin-top:0px; font-size: 20px;}
+/*#shakeSelect .pbox .tip span{float:left;margin-left:100px;}*/
+/*
+#shakeSelect .pbox .tip s{-webkit-transition:-webkit-transform .2s ease-in-out;-moz-transition:-moz-transform .2s ease-in-out;-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);display:block;width:21px;height:40px;margin:9px 0 0 50px;background-size:21px 40px;}
+#shakeSelect .pbox .tip s.rotate{-webkit-transform:rotate(0);-moz-transform:rotate(0);}
+*/
+
+.shake{background: url(../images/shake.png) no-repeat; height: 50px; background-size: 50px;
+padding-left: 60px; width: 50%; margin: auto; font-size: 20px; line-height: 50px;
+color: #FD7E24;}
+.xhqy{position: relative; background-image: url(../images/lottery.png); background-color: white; margin: 0 20px; padding: 0 10px;}
+.xhqy .add{height: 50px; line-height: 50px; border-bottom: 1px dashed #d6d6d6; padding-left: 40px; background-size: 30px 30px; background-image: url(../images/add.png); background-position: 5px 10px; background-repeat: no-repeat;}
+.xhqy .top_bar{position: absolute; top: -5px; left: -2%; width: 104%; height: 10px; background-color: gray; border-radius: 10px; z-index: -2;}
+.xhqy .b_line{position: absolute; bottom: -10px; left: 0; width: 100%; height: 10px; background: url(../images/break_line.png) no-repeat; background-size: 100% 100%;}
+#selectList{overflow:scroll;z-index:900;position: static;/*background:#fff;padding-top: 14px;*/}
+#selectList li.except{border-top:0 none;padding:0;height:14px;}
+#selectList li{border-bottom:1px dashed #d6d6d6; font-weight:bold; position: relative;overflow:hidden;padding:10px 14px 8px;}
+#selectList li.anim,
+.xhqy,
+.xhqy .add,
+.xhqy .b_line{-webkit-animation-name:slideIn; -webkit-animation-duration:.6s; -webkit-animation-timing-function:ease-in-out;}
+@-webkit-keyframes slideIn{
+	from{-webkit-transform:translate3d(-100%,0,0);opacity:0;}
+	to{-webkit-transform:translate3d(0,0,0);opacity:1;}
+}
+#selectList li em{font-weight: bold;color:#bd1c1c;margin-right: 10px;float: left;}
+#selectList li span{color:#0d53b1;margin-right: 10px;float: left;}
+#selectList li .del{color:#1f1f1f;position: absolute;text-align:center;right:15px;top:50%;margin-top:-15px;-webkit-transition:all .1s ease-in-out;width:0;height:30px;line-height:30px;overflow:hidden;}
+#selectList li.select{background: #f8f8f8;}
+#selectList li.select em{color: #edd7d7;}
+#selectList li.select span{color:#d9def0;}
+#selectList li s{color:#777;text-decoration:none;}
+#selectList li.select s{color:#9e9e9e;}
+#selectList li.select .del{width:50px;}
+#selectList li.delete{-webkit-animation-name:slideOut; -webkit-animation-duration:.3s; -webkit-animation-timing-function:ease-in-out; }
+@-webkit-keyframes slideOut{
+	from{-webkit-transform:translate3d(0,0,0);opacity:1;}
+	to{-webkit-transform:translate3d(-100%,0,0);opacity:0;}
+}
+
+#countdown { height:54px; line-height:54px;font-weight: bold;}
+#countdown .wrap { text-align: center; color: #FFFCFF; }
+#countdown .day,#countdown .hour,#countdown .min,#countdown .sec {
+	background: url('../images/timer.png') no-repeat;
+	font-family: Consolas;
+	line-height:17px;
+	width: 13px;
+	display: inline-block;
+	text-align: center;
+	margin: 0 1px;
+	color: #773738;
+}
+#guide{font-size: 27px;color: #939292;font-weight: bold;text-align: center;width: 100%;}
+#guide p{line-height:34px;text-shadow:1px 0 0 #fff;}
+
+#extraInfo{height:80px;width:100%;left:0;position:absolute;bottom:53px;background:#eee;padding-top:10px;-webkit-box-shadow:0 -10px 10px #eee;}
+#extraInfo .childbox{width:300px;margin:0 auto;}
+#extraInfo .usrWrite{color:#333;overflow:hidden;}
+#extraInfo .usrWrite select{-webkit-appearance: none; height: 30px; width: 50px;}
+#extraInfo .usrWrite em{float: left;margin:6px 6px 0 10px;}
+#extraInfo .usrWrite input{border-radius:0;background:#f8f8f8;margin-right: 12px;float: left;width:95px;height:28px;padding-top:5px;border:1px solid #d4d4d4;border-top-color:#bdbdbd;text-align: center;color:#333;}
+#extraInfo .usrWrite input#zh{margin-right:0;}
+#extraInfo .f{line-height:30px;margin-top:8px;}
+#extraInfo .s{line-height:30px;}
+#extraInfo .s em{color:#d50000;}
+#extraInfo .siuCheck{width:27px;height:22px;margin:0 7px 0 10px;display:inline-block;vertical-align:middle;vertical-align:-5px;}
+
+.submitBtn{height: 51px;
+overflow: hidden;
+width: 100%;
+left: 0;
+position: absolute;
+bottom: 0;
+padding-top: 7px;
+background-size:100% 100%;
+background-color: black;}
+.submitBtn .childbox{width: 98%;margin:0 auto;background-size:100% 100%;}
+.submitBtn a{float: left;
+margin-left: 10px;
+line-height: 44px;
+border-radius: 3px;
+color: #fff;
+text-align: center;
+font-weight: bold;
+font-size: 20px;
+background-size:100% 100%;
+}
+.submitBtn .zhbt{width: 25%;border: 1px solid white;margin-left: 0;background: black;color: #FFF;}
+.submitBtn .zhbt.taped{background:#a9c1dc;}
+.submitBtn #submit{background:#F27A22;width:70%;float: right;border:1px solid white; color: white;}
+
+.submitBtn #submit.taped{background:#f9a857;}
+.submitBtn #submit .l{float: left;margin-left:13px;}
+.submitBtn #submit .r{float: right;margin-right: 13px;}
+.submitBtn .prevShow a{}
+.submitBtn .#cancel{background:#6D49A9;width:25%;height:41px;line-height:41px;margin-left:0;text-shadow:0 0 0 #fff;}
+#delall{position:absolute;width:90%;left:50%;margin-left:-150px;border:1px solid #9eb2cb;text-shadow:0 0 0 #fff;box-shadow:0 1px 0 #fff inset;font-weight:700;color:#496ea3;background:#e6f4fd;}
+#delall.taped{background:#a9c1dc;}
+
+/*手选区*/
+.manualBall{background:#eee;height:100%;}
+.manualBall .abacus{position:absolute;width:100%;min-width:320px;left:0; background:#eee;}
+.manualBall .abacus .tip{height:30px;overflow:hidden;line-height:38px;}
+.manualBall .lower{top:100px;}
+.manualBall .low{top:60px;}
+.manualBall .abacus .box{margin-left:20px;padding-bottom:20px;}
+.manualBall .abacus .hd{overflow:hidden;margin-top:10px;font-weight:700;font-size:18px;}
+.manualBall .abacus .hd em{color:#6e6e6e;float:right;font-size:15px;margin:2px 20px 0 0;}
+.manualBall .abacus .hd.red{color:#9d0000;}
+.manualBall .abacus .hd.blue{color:#0d53b1;}
+.manualBall .abacus .ballList{overflow:hidden;width:100%;}
+.manualBall .abacus .ballList li{float:left;width:32px; border: 1px solid #EFAEAB; border-radius: 20px; color:#bf0000;height:32px;line-height:32px;text-align:center;margin:10px 10px 0 0;font-weight:700;background-size:32px 32px;}
+.manualBall .abacus .ballList.red li.select{color:#fff;background-size:32px 32px;}
+.manualBall .abacus .ballList.blue li.select{color:#fff;background-size:32px 32px;}
+.manualBall .abacus .ballList.blue li{color:#0d53b1; border: 1px solid #89B3F5;}
+
+#botTool{height:32px;background:#dee6ee;color:#2277BB;border-top:1px solid #c0c0c0;line-height:32px;position:absolute;left:0;width:100%;bottom:0;-webkit-box-shadow:0 -2px 10px #c0c0c0, 0 1px 0 #fff inset;}
+#botTool .issue{display:inline-block;margin-left:10px;}
+
+
+/*3d直选手选区*/
+
+.myScrollbar{display:none;}
+.manualBall .abacus .line{overflow:hidden;padding:0 0 20px;}
+.manualBall .abacus .line .hd{float:left;margin-top:13px;}
+.manualBall .abacus .line .ballList{padding:0 0 0 26px;width:auto;}
+
+#selPlayType{overflow:hidden;position:absolute;top:50px;left:0;width:100%;height:38px;}
+#selPlayType .typeList{overflow:hidden;width:300px;margin-left:-150px;left:50%;position:absolute;height:38px;}
+#selPlayType .typeList ul{width:1000px;overflow:hidden;}
+#selPlayType .typeList li{float:left;height:37px;line-height:37px;border-bottom:1px solid #ccc;color:#9f9f9f;width:70px;font-size:16px;font-weight:700;text-align:center;}
+#selPlayType .typeList li.cur{color:#fd5a1f;line-height:35px;height:35px;border-bottom:3px solid #ff4401;}
+#selPlayType .more{right:0;top:0;position:absolute;text-align:right;height:27px;padding-top:6px;width:20px;font-weight:700;color:#9f9f9f;background:#eee;}
+
+/*用户新增信息*/
+.newInfo{width:280px;margin:15px auto 0;}
+.newInfo h3{font-size:16px; color:#9d9d9d;}
+.newInfo .con{}
+.newInfo .con li{padding-top:8px;display:block;}
+.newInfo .con li h4{font-size:16px;color:#666;}
+.newInfo .con li .txt{display:block;margin-top:6px;width:268px;height:33px;border:1px solid #d5d5d5;border-radius:0;padding-left:10px;}
+#submitInfo{width:280px;text-shadow:2px 0 0 #C33717;border-radius:3px;line-height:39px;height:39px;text-align: center;font-weight: bold;color:#fff;margin:20px auto 0;border:1px solid #F74A1F;background:-webkit-gradient(linear,0 0,0 100%,from(#FB4B22),to(#EA3F14));display:block;}
+
+#selectList li.delete{-webkit-animation-name:slideOut; -webkit-animation-duration:.3s; -webkit-animation-timing-function:ease-in-out; }
+@-webkit-keyframes slideOut{
+	from{-webkit-transform:translate3d(0,0,0);opacity:1;}
+	to{-webkit-transform:translate3d(-100%,0,0);opacity:0;}
+}
+
+#confirmBox{-webkit-animation-name:boxfade; -webkit-animation-duration:.3s; -webkit-animation-timing-function:ease-in-out; z-index:100;width:280px;position:absolute;height:130px;margin:-65px 0 0 -140px;background:#dee6ee;left:50%;top:50%;border-radius:10px;box-shadow:0 0 10px #626262;}
+@-webkit-keyframes boxfade{
+	from{opacity:0;}
+	to{opacity:1;}
+}
+#confirmBox.boxfadeout{-webkit-animation-name:boxfadeout;opacity:0;}
+@-webkit-keyframes boxfadeout{
+	from{opacity:1;}
+	to{opacity:0;}
+}
+#confirmBox .child{margin:5px;border:1px solid #d7dfe6;border-radius:8px;background:#fff;width:268px;height:118px;}
+#confirmBox .child h3{color:#27b;line-height:40px;text-align:center;font-size:18px;}
+#confirmBox .child .content{color:#707070;text-align:center;height:33px;}
+#confirmBox .child .operate{height:38px;letter-spacing:-5px;}
+#confirmBox .child .operate em{border-radius:5px;display:inline-block;width:118px;height:33px;box-shadow:0 1px 0 #fff inset;font-weight:bold;margin-left:9px;letter-spacing:0;text-align:center;line-height:33px;}
+#confirmBox .child .operate .cancel{border:1px solid #b6c5d4;color:#496ea3;background:#e6f4fd;}
+#confirmBox .child .operate .confirm{border:1px solid #d1a96e;color:#864d03;background:#fed177;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,126 @@
+/* iTabbar CSS Start here */
+#tabbar {
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	font-size:12px;
+  	background: #FD7E24;
+  	bottom: 0;
+	border-top: 1px rgba(255,255,255,0.3) solid;
+  	/*display: none;   build the tabbar off screen */
+  	height: 44px  !important;
+	overflow: hidden;
+ 	position: fixed;
+  	width: 100%;
+  	z-index: 100 !important;
+ 	/*-webkit-box-shadow: 0 -0.05em 0 rgba(0,0,0,0.9); */
+}
+
+
+
+#tabbar li{
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 50%;
+    float:left; 
+    min-width: 3.33333em;
+}
+
+#tabbar li a{
+	background-repeat: no-repeat;
+	background-position: 30px 5px;
+}
+
+#tabbar li a.current{
+    background-color: rgba(255,255,255,.10);
+    color: #4583F9;
+}
+
+#tabbar li a#home {
+	background-image: url("../images/kaijing.png");
+}
+
+#tabbar li a#categories{
+	background-image: url("../images/dingdan.png");
+}
+
+#tabbar li a:active#home {
+	background-image: url("../images/kaijing_a.png");
+}
+
+#tabbar li a:active#categories {
+	background-image: url("../images/dingdan_a.png");
+}
+
+#tabbar a {
+    -webkit-box-flex: 1;
+    border-radius: .60em;
+    display: inline-block;
+    height: 52px;
+    position: relative;
+    width: 100%;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#tabbar a > strong {
+    bottom: 18px;
+    color: #787878;
+    font: bold 1em "Helvetica Neue", Helvetica;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 15px;
+}
+
+
+
+#tabbar a > strong {
+    color: #FFFFFF;
+}
+
+#tabbar a.current> strong {
+    color: #4583F9;
+}
+
+#tabbar a.current> div{
+    background-color: #8AE8FF;
+}
+
+/* FIX BLNK */
+.slide-back.in {
+
+-webkit-animation-name: slideLeftIn; z-index: 10;
+}
+.slide-back.out {
+
+-webkit-animation-name: slideRightOut; z-index: 0;
+}
+.slide-back.in.reverse {
+
+-webkit-animation-name: slideRightIn; z-index: 10;
+}
+.slide-back.out.reverse {
+
+-webkit-animation-name: slideLeftOut; z-index: 0;
+}
+@-webkit-keyframes slideRightIn {
+
+from { -webkit-transform: translateX(100%); } to { -webkit-transform: translateX(0); 
+}
+@-webkit-keyframes slideLeftIn {
+
+from { -webkit-transform: translateX(-100%); } to { -webkit-transform: translateX(0); 
+}
+@-webkit-keyframes slideLeftOut {
+
+from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(-100%); 
+}
+@-webkit-keyframes slideRightOut {
+
+from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(100%); 
+}

@@ -1,0 +1,928 @@
+<!doctype html>
+<html>
+<head>
+<!--
+    @author: luochunhui (Giko) 
+    @email: wo@luochunhui.com 
+    @date: 2013-05-04
+-->
+<!--设置内容宽度自适应设备宽度-->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<!--屏蔽数字拨号-->
+<meta name="format-detection" content="telephone=no" />
+<!--自动隐藏导航栏-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta charset="utf-8">
+<title>彩票</title>
+<link href="../../../css/index.css" type="text/css" rel="stylesheet" />
+<link href="../../../css/reset.css" type="text/css" rel="stylesheet" />
+<link href="../css/bet.css" type="text/css" rel="stylesheet" />
+<link href="../css/jfpal-native.css" type="text/css" rel="stylesheet" />
+<link href="../css/itabbar.css" type="text/css" rel="stylesheet" />
+
+<script src="../../../cordova.js"></script>
+<script src='../../../js/sea.js'></script>
+<script src='../../../js/zepto/zepto.js'></script>
+<script src='../../../js/zepto/zepto-data.js'></script>
+<script src='../../../js/zepto/zepto-selector.js'></script>
+<script src='../../../js/zepto/zepto-touch.js'></script>
+<script src='../../../js/zepto/zepto-fx.js'></script>
+<script src='../../../js/zepto/zepto-fx_methods.js'></script>
+<script src='../../../js/backbone/underscore.js'></script>
+<script src='../../../js/backbone/backbone.js'></script>
+<script src='../../../js/backbone/backbone-localstorage.js'></script>
+<script type="text/javascript">
+	//配置时间戳，解决浏览器或者webview cache问题
+	seajs.config({
+		map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?00001364']]
+	});
+	
+</script>
+<script type="text/javascript">
+    var G_INPAY = false;
+    var G_INFRONT = true;
+	function onDeviceReady() {
+        $('#submit').addClass('issueOver');
+        seajs.use('../js/app', function(app) {
+          _.delay(function(){
+                  if(C.shakeSelectscroll) {
+                      C.shakeSelectscroll.refresh();
+                      C.betapp.guideShow().upFee();
+                  }
+          },800);
+        });
+        //var navigation = jfpal.navigation;
+		//navigation.init();
+        
+        //navigation.setupLeftButton("返回", "back.png", function() {
+        //                           C.Config.leftBar();
+        //                           });
+		//navigation.show();
+        
+        document.addEventListener("pause", function() {
+                                  G_INFRONT = false;
+                                  }, false);
+        document.addEventListener("resume", function() {
+                                  G_INFRONT = true;
+                                  }, false);
+	}
+    
+    function startPay() {
+        G_INPAY = true;
+    }
+    function cancelOrder () {
+        G_INPAY = false;
+        C.Config.simulateClick($('#categories')[0]);
+    }
+    function successOrder( ) {
+        G_INPAY = false;
+        C.Config.simulateClick($('#categories')[0]);
+    }
+    document.addEventListener("deviceready", onDeviceReady, true);
+</script>
+</head>
+
+<body>
+<nav class='navBar'>
+    <span class='leftButton'></span>
+    <span class='rightButton'></span>
+    <span class='navTitle'>彩票</span>
+</nav>
+<a href="#" id="simulateDom"></a>
+<!--用于模拟超链接点击-->
+<section id="doc" class="clip">
+    <section id="wrapper" class="anim"></section>
+</section>
+<!-- Tabbar -->
+<nav id="tabbar">
+    <ul>
+        <li>
+            <a href="index-alipay-native-app.html#!reward/2" id="home" class=" flip">
+                <strong>开奖公告</strong>
+            </a>
+        </li>
+        <li>
+            <a href="orderapp/demo/alipay.html" id="categories" class=" flip">
+                <strong>我的订单</strong>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!------------------------------------------------------------模板列表{{------------------------------------------------------------>
+<!-----------------------------公用模板列表{{----------------------------->
+<!--投注篮{{-->
+<script type="text/template" id="betBasketTemp">
+    <section id="betBasket" class="betBasket temp">
+		<!--页头{{-->
+        <header class="header"></header>
+        <!--页头}}-->
+        <section id="betScroll">
+            <section id="shakeSelect">
+                <div class="pbox">
+                    <div class="tip"><span>下拉可机选...</span><s></s></div>
+                    <!--引导图{{-->
+                    <div id="guide">
+                        <s></s>
+                    </div>
+                    <!--引导图}}-->
+                    <!--选号列表{{-->
+                    <div class='shake'>摇一摇随机加1注</div>
+                    <div class='xhqy'>
+                        <div class='top_bar'></div>
+                        <div class='add'>手动添加一组</div>
+                        <ul id="selectList">
+                        	<!-- no except li when use sharke
+    						<li class="except"></li>
+    						-->
+                        </ul>
+                        <div class='b_line'></div>
+                    </div>
+                    <!--选号列表}}-->
+                </div>
+            </section>
+            
+            <!--投注控制视图{{-->
+            <div id="extraInfo" class="hidden">
+                <div class="childbox">
+                    <div class="usrWrite">
+                        <em>倍投</em>
+                        <select type="tel" id="bt">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">20</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                        </select>
+                        <em class="hidden">追号</em>
+                        <input type="tel" id="zh" value="1" class="hidden" />
+                    </div>
+                    <div class="f hidden"><em id="afterLuckyStop" class="siuCheck selected"></em>中奖后停止追号</div>
+                    <div class="s"><span id="agree" class="siuCheck selected"></span>我已阅读并同意<em><span id="treaty">《网上购彩协议》</span></em></div>
+                </div>
+            </div>
+
+            <div class="submitBtn hidden">
+                <div class="childbox">
+                    <div class="prevShow">
+                        <a href="#" id="cancel" class="hidden">收起</a>
+                        <a href="#" id="zhbt" class="zhbt">倍投</a>
+                        <!--
+                        <a href="#" id="zhbt" class="zhbt">倍投</a>
+                        -->
+                        <a href="#" id="submit" class="submit disabled">
+                            <span class="l">共<em id="fee">0</em>元</span>
+                            <span class="r">立即投注</span>
+                        </a>
+                    </div>
+                    <a href="#" id="delall" class="hidden">删除全部</a>
+                </div>
+            </div>
+            
+            <!--投注控制视图}}-->
+            <a id="paybtn" class="hidden" href="#" target="_blank"></a>
+        </section>
+    </section>
+</script>
+<!--投注篮}}-->
+<!-----------------------------公用模板列表}}----------------------------->
+	
+<!------------------------------聚合页模板{{------------------------------>
+<script type="javascript/template" id="appNavTemp">
+    <section id="appnav" class="temp">
+        <!--菜单{{-->
+        <menu class="appMenu" id="appMenu">
+            <ul>
+                <li class="lottype first ssq" rel="ssq">
+                    <a href="index-alipay-native-app.html#!ssq/bet/2">
+                        <span class="icon"></span>
+                        <div class="txt">
+                            <p><em class="lotname">双色球</em><em class="periodNo" id="ssqPeriodNo"></em></p>
+                            <p>每注2元，最高奖1000万</p>
+                        </div>
+                        <s></s>
+                    </a>
+                </li>
+                <li class="lottype fc3d" rel="fc3d">
+                    <a href="index-alipay-native-app.html#!fc3d/zhx/bet/2">
+                        <span class="icon"></span>
+                        <div class="txt">
+                            <p><em class="lotname">福彩3D</em><em class="periodNo" id="fc3dPeriodNo"></em></p>
+                            <p>2元赢取1000元，中奖率高</p>
+                        </div>
+                        <s></s>
+                    </a>
+                </li>
+            </ul>
+        </menu>
+        <!--菜单}}-->
+    </section>
+</script>
+<!------------------------------聚合页模板}}------------------------------>
+
+<!------------------------------双色球模板{{------------------------------>
+<!--普通选号区{{-->
+<script type="javascript/template" id="ssqCommonTemp">
+    <section id="ssq_common" class="manualBall temp">
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus">
+            <div class="box">
+                <div class="hd red"><em>至少选择6个红球</em>红球区</div>
+                <ul class="ballList red">
+                    <li>01</li>
+                    <li>02</li>
+                    <li>03</li>
+                    <li>04</li>
+                    <li>05</li>
+                    <li>06</li>
+                    <li>07</li>
+                    <li>08</li>
+                    <li>09</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                    <li>27</li>
+                    <li>28</li>
+                    <li>29</li>
+                    <li>30</li>
+                    <li>31</li>
+                    <li>32</li>
+                    <li>33</li>
+                </ul>
+                <div class="hd blue"><em>至少选择1个蓝球</em>蓝球区</div>
+                <ul class="ballList blue">
+                    <li>01</li>
+                    <li>02</li>
+                    <li>03</li>
+                    <li>04</li>
+                    <li>05</li>
+                    <li>06</li>
+                    <li>07</li>
+                    <li>08</li>
+                    <li>09</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--普通选号区}}-->
+
+<!--双色球(大乐透)投注列表渲染模板{{-->
+<script type="javascript/template" id="ssqBetViewTemp">
+    <%
+        _.each(value.l1,function(n){
+            print('<em>' + n + '</em>');
+        });
+        _.each(value.l2,function(n){
+            print('<span>' + n + '</span>');
+        });
+    %>
+    <a href="#" class="del">删除</a>
+</script>
+<!--双色球(大乐透)投注列表渲染模板}}-->
+<!------------------------------双色球模板}}------------------------------>
+
+<!------------------------------福彩3d模板{{------------------------------>
+<!--直选选号区{{-->
+<script type="javascript/template" id="fc3dZhxTemp">
+    <section id="fc3d_zhx" class="manualBall temp">
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li class="cur" rel="fc3d_zhx">直选</li>
+                    <li rel="fc3d_zhxhz">直选和值</li>
+                    <li rel="fc3d_z3">组三</li>
+                    <li rel="fc3d_z3hz">组三和值</li>
+                    <li rel="fc3d_z6">组六</li>
+                    <li rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">每位至少选择1个红球</div>
+                <div class="line">
+                    <div class="hd">百位</div>
+                    <ul class="ballList red">
+                        <li>0</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                    </ul>
+                </div>
+                <div class="line">
+                    <div class="hd">十位</div>
+                    <ul class="ballList red">
+                        <li>0</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                    </ul>
+                </div>
+                <div class="line">
+                    <div class="hd">个位</div>
+                    <ul class="ballList red">
+                        <li>0</li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--直选选号区}}-->
+
+<!--直选和值选号区{{-->
+<script type="javascript/template" id="fc3dZhxHzTemp">
+    <section id="fc3d_zhxhz" class="manualBall temp">
+        
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li rel="fc3d_zhx">直选</li>
+                    <li class="cur" rel="fc3d_zhxhz">直选和值</li>
+                    <li rel="fc3d_z3">组三</li>
+                    <li rel="fc3d_z3hz">组三和值</li>
+                    <li rel="fc3d_z6">组六</li>
+                    <li rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">至少选择1个和值</div>
+                <ul class="ballList red">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                    <li>27</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--直选和值选号区}}-->
+
+<!--组三选号区{{-->
+<script type="javascript/template" id="fc3dZ3Temp">
+    <section id="fc3d_z3" class="manualBall temp">
+        
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li rel="fc3d_zhx">直选</li>
+                    <li rel="fc3d_zhxhz">直选和值</li>
+                    <li class="cur" rel="fc3d_z3">组三</li>
+                    <li rel="fc3d_z3hz">组三和值</li>
+                    <li rel="fc3d_z6">组六</li>
+                    <li rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">至少选择2个红球</div>
+                <ul class="ballList red">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--组三选号区}}-->
+
+<!--组三和值选号区{{-->
+<script type="javascript/template" id="fc3dZ3HzTemp">
+    <section id="fc3d_z3hz" class="manualBall temp">
+        
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li rel="fc3d_zhx">直选</li>
+                    <li rel="fc3d_zhxhz">直选和值</li>
+                    <li rel="fc3d_z3">组三</li>
+                    <li class="cur" rel="fc3d_z3hz">组三和值</li>
+                    <li rel="fc3d_z6">组六</li>
+                    <li rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">至少选择1个和值</div>
+                <ul class="ballList red">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--组三和值选号区}}-->
+
+<!--组六选号区{{-->
+<script type="javascript/template" id="fc3dZ6Temp">
+    <section id="fc3d_z6" class="manualBall temp">
+        
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li rel="fc3d_zhx">直选</li>
+                    <li rel="fc3d_zhxhz">直选和值</li>
+                    <li rel="fc3d_z3">组三</li>
+                    <li rel="fc3d_z3hz">组三和值</li>
+                    <li class="cur" rel="fc3d_z6">组六</li>
+                    <li rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">至少选择3个红球</div>
+                <ul class="ballList red">
+                    <li>0</li>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--组六选号区}}-->
+
+<!--组六和值选号区{{-->
+<script type="javascript/template" id="fc3dZ6HzTemp">
+    <section id="fc3d_z6hz" class="manualBall temp">
+        
+        <section id="selPlayType">
+            <div class="typeList" id="typeList">
+                <ul>
+                    <li rel="fc3d_zhx">直选</li>
+                    <li rel="fc3d_zhxhz">直选和值</li>
+                    <li rel="fc3d_z3">组三</li>
+                    <li rel="fc3d_z3hz">组三和值</li>
+                    <li rel="fc3d_z6">组六</li>
+                    <li class="cur" rel="fc3d_z6hz">组六和值</li>
+                </ul>
+                <span class="more"><img src="../images/rightj.png" /></span>
+            </div>
+        </section>
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus lower">
+            <div class="box">
+                <div class="tip">至少选择1个和值</div>
+                <ul class="ballList red">
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--组六和值选号区}}-->
+
+<!--福彩3d投注列表渲染模板{{-->
+<script type="javascript/template" id="fc3dBetViewTemp">
+    <%
+        var key = key, des = '';
+        switch(key){
+            case 'fc3d_zhx':
+                des = '[直选]';
+                break;
+            case 'fc3d_z3':
+                des = '[组三]';
+                break;
+            case 'fc3d_z6':
+                des = '[组六]';
+                break;
+            default:
+                break;
+        }
+        if(value.l3){
+            print('<em>' + value.l1.toString() + '</em><em>' + value.l2.toString() + '</em><em>' + value.l3.toString() + '</em><s>' + des + '<s>');
+        }else{
+            _.each(value.l1,function(b){
+                print('<em>' + b + '</em>');
+            });
+            print('<s>' + des + '</s>');
+        }
+    %>
+    <a href="#" class="del">删除</a>
+</script>
+<!--福彩3d投注列表渲染模板}}-->
+<!------------------------------福彩3d模板}}------------------------------>
+
+
+<!------------------------------七乐彩模板{{------------------------------>
+<!--普通选号区{{-->
+<script type="javascript/template" id="qlcCommonTemp">
+    <section id="qlc_common" class="manualBall temp">
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus low">
+            <div class="box">
+                <div class="tip">至少选择7个红球</div>
+                <ul class="ballList red">
+                    <li>01</li>
+                    <li>02</li>
+                    <li>03</li>
+                    <li>04</li>
+                    <li>05</li>
+                    <li>06</li>
+                    <li>07</li>
+                    <li>08</li>
+                    <li>09</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                    <li>27</li>
+                    <li>28</li>
+                    <li>29</li>
+                    <li>30</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--普通选号区}}-->	
+
+<!--七乐彩投注列表渲染模板{{-->
+<script type="javascript/template" id="qlcBetViewTemp">
+    <%
+        _.each(value.l1,function(n){
+            print('<em>' + n + '</em>');
+        });
+    %>
+    <a href="#" class="del">删除</a>
+</script>
+<!--七乐彩投注列表渲染模板}}-->
+<!------------------------------七乐彩模板}}------------------------------>
+
+<!------------------------------十五选五模板{{------------------------------>
+<!--普通选号区{{-->
+<script type="javascript/template" id="swxwCommonTemp">
+    <section id="swxw_common" class="manualBall temp">
+        
+        
+        <!--选号球{{-->
+        <div id="Abacus" class="abacus low">
+            <div class="box">
+                <div class="tip">至少选择5个红球</div>
+                <ul class="ballList red">
+                    <li>01</li>
+                    <li>02</li>
+                    <li>03</li>
+                    <li>04</li>
+                    <li>05</li>
+            
+            
+            
+                    <li>06</li>
+                    <li>07</li>
+                    <li>08</li>
+                    <li>09</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                </ul>
+            </div>
+        </div>
+        <!--选号球}}-->
+    </section>
+</script>
+<!--普通选号区}}-->	
+<!------------------------------十五选五模板}}------------------------------>
+
+<!------------------------------异常处理模板{{------------------------------>
+<script type="javascript/template" id="exceptionTemp">
+    <section id="exception" class="temp">
+		<div id="errShow"></div>
+    </section>
+</script>
+<!------------------------------异常处理模板}}------------------------------>
+
+<!---------------------------开奖公告聚合页模板{{--------------------------->
+<script type="javascript/template" id="rewardTemp">
+	<section id="reward" class="temp">
+		<div class="loading"><img src="../images/loading.gif" /> 正在努力请求数据...</div>
+		<div id="rewardMain" class="appMenu">
+			<ul></ul>
+		</div>
+    </section>
+</script>
+
+<script type="javascript/template" id="rewardDataTemp">
+	<%
+		var lotname = '' , lot = '';
+		for(var i in C.Config.lotTypeNumberId){
+			if(lotteryId == C.Config.lotTypeNumberId[i]){
+				//如“双色球”
+				lot = i;
+				lotname = C.Config.lotteryTypeHash[i];
+			}
+		}
+	%>
+    <a href="javascript:void(0)" rel="<%= lot %>">
+        <span class="icon"></span>
+        <div class="txt">
+            <p><em class="lotname"><%= lotname %></em> <em class="periodNo">第<%= periodId %>期</em></p>
+            <p class="ball">
+            	<%
+                    if (awardNumber !== "") {
+                        // replace前"01,02,03", replace后"01 02 03"
+                        awardNumber = awardNumber.replace(/,/g, ' ');
+                        // jfpal
+                        //双色球、七乐彩
+                        if(lotteryId == 01){
+                            var lucky = awardNumber.split('|');
+                            print(lucky[0].replace(/(\d{2})/gi,'<em>$1</em>') + lucky[1].replace(/(\d{2})/gi,'<span>$1</span>'));
+                        }else if(lotteryId == 05){
+                            //福彩3d
+                            print(awardNumber.replace(/,/gi,'').replace(/(\d{1})/gi,'<em>$1</em>'));
+                        }else if(lotteryId == 10){
+                            //十五选五
+                            print(awardNumber.replace(/(\d{2})/gi,'<em>$1</em>'));
+                        }
+                    }
+            	%>
+            </p>
+        </div>
+    </a>
+</script>
+<!---------------------------开奖公告聚合页模板}}--------------------------->
+
+<!---------------------------开奖公告列表页模板{{--------------------------->
+<script type="javascript/template" id="rewardListTemp">
+	<section id="rewardList" class="temp">
+		<div class="loading"><img src="../images/loading.gif" /> 正在努力请求数据...</div>
+		<div id="rewardListMain" class="appMenu">
+			<div class="box">
+				<ul style="padding-bottom:0;"></ul>
+				<div class="getMore hidden">点击查看更多...</div>
+				<div class="load hidden"><img src="../images/loading.gif" /> 正在加载数据...</div>
+			</div>
+		</div>
+    </section>
+</script>
+
+<script type="javascript/template" id="rewardDataListTemp">
+    <p class="other"><em>第<%= periodId %>期</em><em style="margin-left:20px;"><%= awardTime %></em></p>
+    <p class="lucky">
+        <%
+            // replace前"01,02,03", replace后"01 02 03"
+            awardNumber = awardNumber.replace(/,/g, ' ');
+            //双色球
+            if(lotteryId == 01){
+                var lucky = awardNumber.split('|');
+                print(lucky[0].replace(/(\d{2})/gi,'<em>$1</em>') + lucky[1].replace(/(\d{2})/gi,'<span>$1</span>'));
+            }else if(lotteryId == 05){
+                //福彩3d
+                print(awardNumber.replace(/,/gi,'').replace(/(\d{1})/gi,'<em>$1</em>'));
+            }else if(lotteryId == 10){
+            	//十五选五
+                print(awardNumber.replace(/(\d{2})/gi,'<em>$1</em>'));
+            }
+        %>
+    </p>
+</script>
+
+<script type="javascript/template" id="newUserTpl">
+    <section id="exception" class="temp">
+		<section class="newInfo">
+			<h3>以下信息是中大奖后领奖的唯一凭证</h3>
+			<ul class="con">
+				<li>
+					<h4>真实姓名</h4>
+					<input class="txt" type="text" id="userName" />
+				</li>
+				<li>
+					<h4>身份证号</h4>
+					<input class="txt" type="text" id="cardId" />
+				</li>
+				<li>
+					<h4>手机号码</h4>
+					<input class="txt" type="tel" id="phoneNumber" />
+				</li>
+			</ul>
+		</section>
+		<a href="#" id="submitInfo">提交</a>
+	</section>
+</script>
+
+<!---------------------------开奖公告列表页模板}}--------------------------->
+<!------------------------------------------------------------模板列表}}------------------------------------------------------------>
+
+</body>
+</html>

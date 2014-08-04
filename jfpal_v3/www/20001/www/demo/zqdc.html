@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<!--
+    @author: 函谷 
+    @email: hangu.mh@taobao.com 
+    @date: 2012-09-17
+-->
+<!--设置内容宽度自适应设备宽度-->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<!--屏蔽数字拨号-->
+<meta name="format-detection" content="telephone=no" />
+<!--自动隐藏导航栏-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!--声明支付宝客户端导航栏上按钮文案以及点击回调，每次切换后，需对此meta重新设置-->
+<meta name="left-bar-item" id="alipayLeftBar" content="title=返回,onclick=C.Config.leftBar()" />
+<meta name="center-bar-item" id="alipayCenterBar" content="title=足球单场" />
+<meta name="right-bar-item" id="alipayRightBar" content="title=赛事筛选,onclick=C.Config.rightBar()" />
+<meta charset="utf-8">
+<title>足球单场</title>
+<link href="../css/reset.css" type="text/css" rel="stylesheet" />
+<link href="../css/sport.css" type="text/css" rel="stylesheet" />
+<script charset="utf-8" src="../js/lib/sea.js"></script>
+<script charset="utf-8" src="../js/lib/zepto.js"></script>
+<script charset="utf-8" src="../js/lib/underscore.js"></script>
+<script charset="utf-8" src="../js/lib/backbone.js"></script>
+<script charset="utf-8" src="../js/config.js"></script>
+<script charset="utf-8" src="../js/s-base/s-config.js"></script>
+</head>
+
+<body>
+<!--用于模拟超链接点击-->
+<a href="#" id="simulateDom"></a>
+<section id="wrapper" class="">
+	<section id="main"></section>
+	<section id="extra"></section>
+</section>
+
+<!-- 投注区 -->
+<script type="text/template" id="BetTemp">
+	<section id="bet">
+		<ul class="hd">
+			<li class="w1">赛事/截止</li>
+			<li class="w2">主胜(让球)</li>
+			<li class="w3">平</li>
+			<li class="w4">主负</li>
+		</ul>
+		<div class="bd" id="betBox">
+			<div id="matchBox"></div>
+			<div class="loading" id="loading"><img src="../images/loading.gif" /> 正在努力请求数据...</div>
+			<div class="more hidden" id="more">点击查看更多</div>
+		</div>
+	</section>
+</script>
+
+<!-- 比赛单元 -->
+<script type="text/template" id="ItemTemp">
+	<dt class="w1">
+		<p><%= gameName.sub(10) %></p>
+		<p>周<%= matchsTimes.slice(-1) %><s></s><%= buyTime.slice(11,16) %></p>
+	</dt>
+	<dd class="w2 <% if(win) print('on') %>" data-value="win">
+		<div class="box">
+			<p>
+				<%= hostTeam.sub(8) %><% 
+					if (realHandicap < 0) {
+						print('<span class="neg">(' + realHandicap + ')</span>');
+					} else if (realHandicap > 0) {
+						print('<span class="pos">(' + realHandicap + ')</span>');
+					}
+				%>
+			</p>
+			<p>SP<s></s><span class="sp"><%= parseFloat(scsp3).toFixed(2) %></span></p>
+		</div>
+	</dd>
+	<dd class="w3 <% if(even) print('on') %>" data-value="even">
+		<div class="box">
+			<p>VS</p>
+			<p>SP<s></s><span class="sp"><%= parseFloat(scsp1).toFixed(2) %></span></p>
+		</div>
+	</dd>
+	<dd class="w4 <% if(negative) print('on') %>" data-value="negative">
+		<div class="box">
+			<p><%= visTeam.sub(8) %></p>
+			<p>SP<s></s><span class="sp"><%= parseFloat(scsp0).toFixed(2) %></span></p>
+		</div>
+	</dd>
+</script>
+
+<!-- 投注栏 -->
+<script type="text/template" id="BasketTemp">
+	<section id="basket">
+		<a class="btn-passType" id="btn-passType" href="#">
+			过关方式及倍投
+			<span class="require"></span>
+		</a>
+		<a class="btn-bet" id="btn-bet" href="#">
+			共<span id="money">0</span>元
+			<span class="fr">立即投注</span>
+		</a>
+	</section>
+</script>
+
+<!-- 过滤 -->
+<script type="text/template" id="FilterTemp">
+	<section id="filter">
+		<div class="hd">共有<span class="num"><%= length %></span>场比赛</div>
+		<div class="bd" id="extraBox">
+			<ul>
+				<%	
+					_.each(game, function(a){				
+				%>
+						<li <% if (data[a].select) print('class="on"') %>><%= a %></li>
+				<%
+					});
+				%>
+			</ul>
+		</div>
+	</section>
+</script>
+
+<!-- 过关方式 -->
+<script type="text/template" id="PassTypeTemp">	
+	<section id="passType">
+		<div class="hd">已选<span><%= C.DataCache.bet.size %></span>场 投注<span class="num"><%= C.DataCache.betNum %></span>注 金额<span class="money"><%= C.DataCache.betFee %></span>元</div>
+		<div class="bd" id="extraBox">
+			<ul>
+				<%	
+					_.each(pt, function(a){
+						if (_.indexOf(C.DataCache.passType, a) >= 0) {
+							print('<li class="on">' + a + '</li>');
+						} else {
+							print('<li>' + a + '</li>');
+						}
+					});
+				%>
+				<li class="disable">我已经阅读并同意<span id="treaty">《网上购彩协议》</span></li>
+			</ul>
+		</div>
+		<section class="ft">
+			倍投:
+			<input type="tel" value="<%= (C.DataCache.bt == 0) ? '' : C.DataCache.bt %>" id="bt">
+			倍
+		</section>
+	</section>
+</script>
+
+<script>
+function onDeviceReady(){
+	seajs.config({
+        map: [
+            [ /^(.*\.(?:css|js))(.*)$/i, '$1?201208298']
+        ]
+    });
+
+	seajs.use('../js/zqdc/zqdcapp');
+}
+document.addEventListener("deviceready", onDeviceReady, true);
+</script>
+</body>
+</html>

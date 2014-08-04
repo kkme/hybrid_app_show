@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<!--
+    @author: 函谷 
+    @email: hangu.mh@taobao.com 
+    @date: 2012-09-17
+-->
+<!--设置内容宽度自适应设备宽度-->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<!--屏蔽数字拨号-->
+<meta name="format-detection" content="telephone=no" />
+<!--自动隐藏导航栏-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!--声明支付宝客户端导航栏上按钮文案以及点击回调，每次切换后，需对此meta重新设置-->
+<meta name="left-bar-item" id="alipayLeftBar" content="title=返回,onclick=C.Config.leftBar()" />
+<meta name="center-bar-item" id="alipayCenterBar" content="title=竞彩足球" />
+<meta name="right-bar-item" id="alipayRightBar" content="title=往期赛果,onclick=C.Config.rightBar()" />
+<meta charset="utf-8">
+<title>竞彩足球</title>
+<link href="../css/reset.css" type="text/css" rel="stylesheet" />
+<link href="../css/sport.css" type="text/css" rel="stylesheet" />
+<script charset="utf-8" src="../js/lib/sea.js"></script>
+<script charset="utf-8" src="../js/lib/zepto.js"></script>
+<script charset="utf-8" src="../js/lib/underscore.js"></script>
+<script charset="utf-8" src="../js/lib/backbone.js"></script>
+<script charset="utf-8" src="../js/config.js"></script>
+<script charset="utf-8" src="../js/s-base/s-config.js"></script>
+</head>
+
+<body>
+<!--用于模拟超链接点击-->
+<a href="#" id="simulateDom"></a>
+<button id="calendar" class="hidden" type="button"></button>
+<div id="myCalendar"></div>
+<section id="">
+	<section id="main"></section>
+</section>
+
+<!-- 投注区 -->
+<script type="text/template" id="rewardTemp">
+	<section id="reward">
+		<div id="matchBox"></div>
+		<div class="loading" id="loading"><img src="../images/loading.gif" /> 正在努力请求数据...</div>
+	</section>
+</script>
+
+<!-- 比赛单元 -->
+<script type="text/template" id="ItemTemp">
+	<div class="hd">
+		<h2><%= matchsTimes %> 共<%= matchList.length %>场比赛</h2>
+		<s></s>
+	</div>
+	<div class="bd">
+		<%
+			_.each(matchList, function(match) {
+				arr = match.multiSp.split(',');
+		%>
+			<dl>
+				<dt class="w1">
+					<p><%= match.gameName.sub(10) %></p>
+					<p>周<%= matchsTimes.slice(-1) %> <%= match.matchOrder.toString().slice(-3) %></p>
+				</dt>
+				<dd class="w2">
+					<%= match.hostTeam.sub(8) %><% 
+						if (arr[0] < 0) {
+							print('<span class="neg">(' + arr[0] + ')</span>');
+						} else if (arr[0] > 0) {
+							print('<span class="pos">(' + arr[0] + ')</span>');
+						}
+					%>
+				</dd>
+				<dd class="w3 result">
+					<%
+					//如果已开奖
+					if (match.drawed) {
+						if ((match.hostTeamFscore == -1) && (match.visTeamFscore == -1)) {
+							print('<div class="null">取消</div>');
+						} else if(match.hostTeamFscore + Number(arr[0]) > match.visTeamFscore){
+							print('<div class="win">胜<em>(' + match.hostTeamFscore + ':' + match.visTeamFscore + ')</em></div>');
+						}else if(match.hostTeamFscore + Number(arr[0]) < match.visTeamFscore){
+							print('<div class="negative">负<em>(' + match.hostTeamFscore + ':' + match.visTeamFscore + ')</em></div>');
+						}else{
+							print('<div class="even">平<em>(' + match.hostTeamFscore + ':' + match.visTeamFscore + ')</em></div>');
+						}
+					}else{
+						print('<div class="null">-:-</div>');
+					}
+					%>
+				</dd>
+				<dd class="w4">
+					<%= match.visTeam.sub(8) %>
+				</dd>
+			</dl>	
+		<% }); %>
+	</div>
+</script>
+
+<script>
+function onDeviceReady(){
+	seajs.config({
+        map: [
+            [ /^(.*\.(?:css|js))(.*)$/i, '$1?20120809']
+        ]
+    });
+
+	seajs.use('../js/jczq/jczqreward');
+}
+document.addEventListener("deviceready", onDeviceReady, true);
+</script>
+</body>
+</html>
