@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--设置内容宽度自适应设备宽度-->
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+        <!--屏蔽数字拨号-->
+        <meta name='format-detection' content='telephone=no'>
+        <meta charset='utf-8'>
+        <link href='../css/main.css' rel='stylesheet' />
+        <link href='../css/reset.css' rel='stylesheet' />
+        <script src='../js/avalon_libs/avalon.mobile.min.js'></script>
+        <script>
+            require(['../config/app' ,'ready!'], function() {});
+        </script>
+    </head>
+    <body>
+        <!-- 导航条 -->
+        <nav ms-controller='nav'>
+            <span class='back' ms-on-tap='back'></span>
+            <span class='navTitle' ms-text='title'></span>
+            <span class='edit' ms-css-visibility='isVisible' ms-on-tap='edit'></span>
+        </nav>
+
+        <!-- spa 部分 -->
+        <div id='container'>
+            <div class='index' ms-controller='index' ms-widget='indexui,index_wgt'></div>
+            <div class='surPho' ms-controller='surPho' ms-widget='surPhoui,surPho_wgt'></div>
+            <div class='phoSet' ms-controller='phoSet' ms-widget='phoSetui,phoSet_wgt'></div>
+            <div class='helpDec' ms-controller='helpDec' ms-widget='helpDecui,helpDec_wgt'></div>
+            <div class='feedback' ms-controller='feedback' ms-widget='feedbackui,feedback_wgt'></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+<section ms-repeat='phoneType.setStep'>
+	<h4 ms-if='$val.name' ms-text='$val.name'></h4>
+	<ul>
+	    <li ms-repeat='$val.step'>
+	        <h5 ms-text='el[0]'></h5>
+	        <div ms-if='el[1][0]' ms-repeat='el[1]' ms-css-background-image='url({{el}})'></div>
+	    </li>
+	</ul>
+</section>
+<div class='toHelpMore' ms-on-tap='toHelpMore'>还是没有解决问题请点击这里</div>

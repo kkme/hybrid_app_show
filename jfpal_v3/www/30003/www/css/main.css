@@ -1,0 +1,75 @@
+/*---------- reset ----------*/
+*{background-repeat: no-repeat; font-weight: normal;}
+html{background-color: #F0F0F0;}
+/*---------- reset结束 ----------*/
+
+
+/*---------- 顶部导航条样式 ----------*/
+nav{position: fixed; width: 100%; top: 0; overflow: hidden; background-color: #3cade7; text-align: center; border-right: 0; color: white; line-height: 41px;}
+nav .back,
+nav .edit{width: 50px; height: 36px; margin-top: 5px; background-position: center;}
+nav .back{float: left; background-image: url(../images/top_back.png); background-image: -webkit-image-set(url(../images/top_back.png) 1x, url(../images/top_back@2x.png) 2x);}
+nav .edit{float: right; background-image: url(../images/edit.png); background-image: -webkit-image-set(url(../images/edit.png) 1x, url(../images/edit@2x.png) 2x); visibility: hidden;}
+/*---------- 顶部导航条样式结束 ----------*/
+
+
+/*---------- #container 样式 ----------*/
+#container{margin-top: 41px;}
+/*---------- #container 样式结束 ----------*/
+
+
+/*---------- 组件共用样式 ----------*/
+.index ul,
+.surPho ul{background-color: white; border: 1px solid #D1D1D1; border-left: 0; border-right: 0; padding-left: 5%;}
+.index li,
+.surPho li{border-bottom: 1px solid #D1D1D1; height: 44px; line-height: 44px; padding-right: 4%; padding-top: 0;}
+.index li.last,
+.surPho li.last{border-bottom: none;}
+/*---------- 首页共用样式结束 ----------*/
+
+
+/*---------- 首页样式 ----------*/
+.index{display: none;}
+.index{padding-top: 15px;}
+.index h4{padding: 15px 0 5px 5%;  color: rgb(151, 151, 151); padding-right: 50px;}
+.index li.index{display: block; background-image: url(../images/arrows.png); background-image: -webkit-image-set(url(../images/arrows.png) 1x, url(../images/arrows@2x.png) 2x); background-position: right; background-origin: content-box;}
+/*---------- 首页样式结束 ----------*/
+
+
+/*---------- 支持手机型号列表页样式 ----------*/
+.surPho{display: none;}
+/*---------- 支持手机型号列表页样式结束 ----------*/
+
+
+/*---------- 手机系列页样式 ----------*/
+.phoSet{display: none; padding: 20px 5% 30px;}
+.phoSet section{margin-bottom: 40px;}
+.phoSet h4{font-size: 20px;}
+.phoSet ul{margin-right: 2%;}
+.phoSet li{margin-top: 10px;}
+.phoSet li > div {height: 130px; margin-top: 5px; background-size: 283px 130px;}
+.phoSet .toHelpMore{width: 80%; height: 40px; line-height: 40px; margin: auto; border: 1px solid #1679FB; border-radius: 5px; text-align: center; color: #1679FB; background-color: white;}
+/*---------- 手机系列页样式结束 ----------*/
+
+
+/*---------- 手机系列页样式 ----------*/
+.helpDec{display: none; padding: 15px 3%;}
+.helpDec h4{font-size: 20px;}
+.helpDec ol{margin-top: 15px; border-bottom: 1px dashed #C4C4C4;}
+.helpDec li{margin-bottom: 15px;}
+.helpDec .tip{margin-top: 15px;}
+.helpDec .tip span{display: inline-block; width: 18px; height: 18px; background-image: url(../images/edit_a.png); background-image: -webkit-image-set(url(../images/edit_a.png) 1x, url(../images/edit_a@2x.png) 2x); background-position: center bottom;}
+/*---------- 手机系列页样式 ----------*/
+
+
+/*---------- 反馈页样式 ----------*/
+.feedback{display: none; padding-top: 20px;}
+.feedback textarea{display: block; width: 94%; height: 150px; border: none; padding: 7px 3%;}
+.feedback .submit{margin: 20px auto; width: 90%; height: 45px; line-height: 45px; background-color: #44AD28; text-align: center; border-radius: 5px; color: white; font-size: 20px; -webkit-box-sizing: border-box; padding: 0 35%;}
+.feedback .submit .left{float: left;}
+.feedback .submit .right{float: right;}
+/*---------- 反馈页样式结束 ----------*/
+
+
+
+
